@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<policy integrity_check="87506900a0c4246f9c78a2a9d9d4da22" bigip_version="13.1.0" name="/Common/Fundamental_Policy_13_1">
+<policy integrity_check="441dcba56e5968038c3a320254f3a3dc" bigip_version="13.1.0" name="/Common/Comperhensive_Policy_13_1">
   <type>Security</type>
   <policy_version>
-    <timestamp>2018-05-09T10:30:38Z</timestamp>
+    <timestamp>2018-05-09T10:30:00Z</timestamp>
     <device_name>asm02.pmlab.com</device_name>
-    <policy_name>/Common/Fundamental_Policy_13_1</policy_name>
-    <last_change> Security Policy /Common/Fundamental_Policy_13_1 [add]: Type was set to Security.
+    <policy_name>/Common/Comperhensive_Policy_13_1</policy_name>
+    <last_change> Security Policy /Common/Comperhensive_Policy_13_1 [add]: Type was set to Security.
 Encoding Selected was set to false.
 Application Language was set to utf-8.
 Case Sensitivity was set to Case Sensitive.
-Template was set to POLICY_TEMPLATE_FUNDAMENTAL.
+Template was set to POLICY_TEMPLATE_COMPREHENSIVE.
 Active was set to false.
 Differentiate between HTTP and HTTPS URLs was set to Protocol Specific.
-Policy Name was set to /Common/Fundamental_Policy_13_1.
-Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Policy_13_1, username = admin, client IP = 192.168.188.33 }</last_change>
+Policy Name was set to /Common/Comperhensive_Policy_13_1.
+Enforcement Mode was set to Blocking. { audit: policy = /Common/Comperhensive_Policy_13_1, username = admin, client IP = 192.168.188.33 }</last_change>
   </policy_version>
-  <description>Fundamental Policy</description>
+  <description>Comprehensive Policy</description>
   <case_insensitive>false</case_insensitive>
   <owa>false</owa>
   <protocol_free>false</protocol_free>
@@ -44,7 +44,7 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
     <csrf_url>
       <target_pattern>*</target_pattern>
       <wildcard_order>1</wildcard_order>
-      <last_updated>2018-05-09T10:30:32Z</last_updated>
+      <last_updated>2018-05-09T10:29:53Z</last_updated>
       <csrf_url_method>POST</csrf_url_method>
       <csrf_url_enforcement_action>verify-csrf-token</csrf_url_enforcement_action>
       <required_parameters>ignore</required_parameters>
@@ -103,9 +103,9 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
   <blocking>
     <enforcement_mode>blocking</enforcement_mode>
     <violation name="Illegal attachment in SOAP message" id="ILLEGAL_SOAP_ATTACHMENT">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Data Guard: Information leakage detected" id="RESPONSE_SCRUBBING">
@@ -115,15 +115,15 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Login URL expired" id="PARSER_EXPIRED_INGRESS_OBJECT">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Login URL bypassed" id="ILLEGAL_INGRESS_OBJECT">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Request length exceeds defined buffer size" id="REQUEST_TOO_LONG">
@@ -133,9 +133,9 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Virus detected" id="VIRUS_DETECTED">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Evasion technique detected" id="EVASION_DETECTED">
@@ -145,21 +145,21 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Web Services Security failure" id="PARSER_FAILED_SOAP_SECURITY">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="XML data does not comply with format settings" id="XML_FORMAT_SETTING">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="XML data does not comply with schema or WSDL document" id="XML_WSDL">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Malformed XML data" id="MALFORMED_XML">
@@ -235,39 +235,39 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="SOAP method not allowed" id="SOAP_METHOD_NOT_ALLOWED">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal meta character in value" id="METACHAR_IN_DEF_PARAM">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal meta character in parameter name" id="METACHAR_IN_PARAM_NAME">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal meta character in URL" id="METACHAR_IN_OBJ">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal repeated parameter name" id="REPEATED_PARAMETER_NAME">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="JSON data does not comply with format settings" id="JSON_FORMAT_SETTING">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal header length" id="HEADER_LEN">
@@ -277,9 +277,9 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Null in multi-part parameter value" id="MULTI_PART_PARAM_VAL">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal POST data length" id="POST_DATA_LEN">
@@ -289,27 +289,27 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal empty parameter value" id="EMPTY_PARAM_VALUE">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal parameter" id="PARAM">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal query string or POST data" id="QS_OR_POST_DATA">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal session ID in URL" id="SESSSION_ID_IN_URL">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal method" id="ILLEGAL_METHOD">
@@ -319,15 +319,15 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal flow to URL" id="FLOW_TO_OBJ">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal URL" id="OBJ_DOESNT_EXIST">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal file type" id="OBJ_TYPE">
@@ -337,45 +337,45 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Parameter value does not comply with regular expression" id="PARAM_VALUE_NOT_MATCHING_REGEX">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal number of mandatory parameters" id="NUM_OF_MANDATORY_PARAMS">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal parameter numeric value" id="PARAM_NUMERIC_VALUE">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal parameter data type" id="PARAM_DATA_TYPE">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal parameter value length" id="PARAM_VALUE_LEN">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal dynamic parameter value" id="DYN_PARAM_VALUE">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal static parameter value" id="STATIC_PARAM_VALUE">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Expired timestamp" id="EXPIRED_TIMESTAMP">
@@ -385,9 +385,9 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="ASM Cookie Hijacking" id="MSG_KEY">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Access from disallowed User/Session/IP/Device ID" id="SESSION_AWARENESS">
@@ -397,9 +397,9 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal entry point" id="ENTRY_POINT">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Malformed JSON data" id="MALFORMED_JSON">
@@ -415,9 +415,9 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Modified domain cookie(s)" id="MOD_DOMAIN_COOKIE">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Modified ASM cookie" id="MOD_ASM_COOKIE">
@@ -433,21 +433,21 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal request content type" id="ILLEGAL_REQUEST_CONTENT_TYPE">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal meta character in header" id="METACHAR_IN_HEADER">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Malformed GWT data" id="MALFORMED_GWT">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Disallowed file upload content detected" id="DISALLOWED_FILE_UPLOAD_CONTENT">
@@ -469,9 +469,9 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="GWT data does not comply with format settings" id="GWT_FORMAT_SETTING">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Mandatory HTTP header is missing" id="MISSING_MANDATORY_HEADER">
@@ -517,21 +517,21 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal cross-origin request" id="CROSS_ORIGIN_REQUEST">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Text content found in binary only WebSocket" id="WEBSOCKET_TEXT_MESSAGE_NOT_ALLOWED">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Binary content found in text only WebSocket" id="WEBSOCKET_BINARY_MESSAGE_NOT_ALLOWED">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Illegal WebSocket extension" id="WEBSOCKET_EXTENSION">
@@ -553,9 +553,9 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="Plain text data does not comply with format settings" id="PLAINTEXT_FORMAT_SETTING">
-      <alarm>false</alarm>
-      <block>false</block>
-      <learn>false</learn>
+      <alarm>true</alarm>
+      <block>true</block>
+      <learn>true</learn>
       <policy_builder_tracking>enabled</policy_builder_tracking>
     </violation>
     <violation name="IP is blacklisted" id="BLACKLISTED_IP">
@@ -572,38 +572,38 @@ Enforcement Mode was set to Blocking. { audit: policy = /Common/Fundamental_Poli
     <evasion_setting policy_builder_tracking="enabled" name="Bare byte decoding">disabled</evasion_setting>
     <evasion_setting policy_builder_tracking="enabled" name="Apache whitespace">disabled</evasion_setting>
     <evasion_setting policy_builder_tracking="enabled" name="Bad unescape">disabled</evasion_setting>
-    <http_protocol_compliance_setting policy_builder_tracking="disabled" name="POST request with Content-Length: 0">disabled</http_protocol_compliance_setting>
+    <http_protocol_compliance_setting policy_builder_tracking="enabled" name="POST request with Content-Length: 0">disabled</http_protocol_compliance_setting>
     <http_protocol_compliance_setting policy_builder_tracking="enabled" name="Header name with no header value">disabled</http_protocol_compliance_setting>
     <http_protocol_compliance_setting policy_builder_tracking="enabled" name="Several Content-Length headers">disabled</http_protocol_compliance_setting>
     <http_protocol_compliance_setting policy_builder_tracking="enabled" name="Chunked request with Content-Length header">disabled</http_protocol_compliance_setting>
-    <http_protocol_compliance_setting policy_builder_tracking="disabled" name="Body in GET or HEAD requests">disabled</http_protocol_compliance_setting>
+    <http_protocol_compliance_setting policy_builder_tracking="enabled" name="Body in GET or HEAD requests">disabled</http_protocol_compliance_setting>
     <http_protocol_compliance_setting policy_builder_tracking="enabled" name="Bad multipart/form-data request parsing">disabled</http_protocol_compliance_setting>
     <http_protocol_compliance_setting policy_builder_tracking="enabled" name="Bad multipart parameters parsing">disabled</http_protocol_compliance_setting>
     <http_protocol_compliance_setting policy_builder_tracking="enabled" name="No Host header in HTTP/1.1 request">disabled</http_protocol_compliance_setting>
     <http_protocol_compliance_setting policy_builder_tracking="enabled" name="CRLF characters before request start">disabled</http_protocol_compliance_setting>
-    <http_protocol_compliance_setting policy_builder_tracking="disabled" name="Host header contains IP address">disabled</http_protocol_compliance_setting>
+    <http_protocol_compliance_setting policy_builder_tracking="enabled" name="Host header contains IP address">disabled</http_protocol_compliance_setting>
     <http_protocol_compliance_setting policy_builder_tracking="enabled" name="Content length should be a positive number">disabled</http_protocol_compliance_setting>
     <http_protocol_compliance_setting policy_builder_tracking="disabled" name="Bad HTTP version">enabled</http_protocol_compliance_setting>
     <http_protocol_compliance_setting policy_builder_tracking="disabled" name="Null in request">enabled</http_protocol_compliance_setting>
-    <http_protocol_compliance_setting policy_builder_tracking="disabled" name="High ASCII characters in headers">disabled</http_protocol_compliance_setting>
+    <http_protocol_compliance_setting policy_builder_tracking="enabled" name="High ASCII characters in headers">disabled</http_protocol_compliance_setting>
     <http_protocol_compliance_setting policy_builder_tracking="disabled" name="Unparsable request content">enabled</http_protocol_compliance_setting>
     <http_protocol_compliance_setting policy_builder_tracking="enabled" name="Check maximum number of headers">disabled</http_protocol_compliance_setting>
     <http_protocol_compliance_setting policy_builder_tracking="enabled" name="Bad host header value">disabled</http_protocol_compliance_setting>
     <http_protocol_compliance_setting policy_builder_tracking="enabled" name="Check maximum number of parameters">disabled</http_protocol_compliance_setting>
     <http_protocol_compliance_setting policy_builder_tracking="enabled" name="Multiple host headers">disabled</http_protocol_compliance_setting>
-    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_INTERNAL_ERROR">disabled</web_services_security_settings>
-    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_MALFORMED_ERROR">disabled</web_services_security_settings>
-    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_CERTIFICATE_EXPIRED">disabled</web_services_security_settings>
-    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_CERTIFICATE_ERROR">disabled</web_services_security_settings>
-    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_DECRYPTION_ERROR">disabled</web_services_security_settings>
-    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_ENCRYPTION_ERROR">disabled</web_services_security_settings>
-    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_SIGNING_ERROR">disabled</web_services_security_settings>
-    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_VERIFICATION_ERROR">disabled</web_services_security_settings>
-    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_MISSING_TIMESTAMP">disabled</web_services_security_settings>
-    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_INVALID_TIMESTAMP">disabled</web_services_security_settings>
-    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_EXPIRED_TIMESTAMP">disabled</web_services_security_settings>
-    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_TIMESTAMP_EXPIRATION_TOO_FAR_IN_THE_FUTURE">disabled</web_services_security_settings>
-    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_UNSIGNED_TIMESTAMP">disabled</web_services_security_settings>
+    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_INTERNAL_ERROR">enabled</web_services_security_settings>
+    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_MALFORMED_ERROR">enabled</web_services_security_settings>
+    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_CERTIFICATE_EXPIRED">enabled</web_services_security_settings>
+    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_CERTIFICATE_ERROR">enabled</web_services_security_settings>
+    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_DECRYPTION_ERROR">enabled</web_services_security_settings>
+    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_ENCRYPTION_ERROR">enabled</web_services_security_settings>
+    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_SIGNING_ERROR">enabled</web_services_security_settings>
+    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_VERIFICATION_ERROR">enabled</web_services_security_settings>
+    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_MISSING_TIMESTAMP">enabled</web_services_security_settings>
+    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_INVALID_TIMESTAMP">enabled</web_services_security_settings>
+    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_EXPIRED_TIMESTAMP">enabled</web_services_security_settings>
+    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_TIMESTAMP_EXPIRATION_TOO_FAR_IN_THE_FUTURE">enabled</web_services_security_settings>
+    <web_services_security_settings policy_builder_tracking="enabled" name="XML_WSS_UNSIGNED_TIMESTAMP">enabled</web_services_security_settings>
     <maximum_decoding_passes>3</maximum_decoding_passes>
     <maximum_headers>20</maximum_headers>
     <maximum_parameters>500</maximum_parameters>
@@ -706,7 +706,7 @@ Connection: close</response_header>
     </response_page_settings>
   </blocking>
   <session_awareness>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <lifetime_window>900</lifetime_window>
     <violation_actions_enabled>true</violation_actions_enabled>
     <session>
@@ -746,7 +746,7 @@ Connection: close</response_header>
     <block_all_period>600</block_all_period>
     <block_all_period_enabled>true</block_all_period_enabled>
     <block_only_autheticated>false</block_only_autheticated>
-    <session_hijacking_enabled>false</session_hijacking_enabled>
+    <session_hijacking_enabled>true</session_hijacking_enabled>
     <application_username_type>4</application_username_type>
     <delay_blocking>
       <violations>
@@ -1081,11 +1081,11 @@ Connection: close</response_header>
       <check_signatures>true</check_signatures>
       <check_param_value_lenth>false</check_param_value_lenth>
       <handle_json_parameters>true</handle_json_parameters>
-      <defense_setting enabled="false" name="Maximum Total Length Of JSON Data">10000</defense_setting>
-      <defense_setting enabled="false" name="Maximum Value Length">100</defense_setting>
-      <defense_setting enabled="false" name="Maximum Structure Depth">10</defense_setting>
-      <defense_setting enabled="false" name="Maximum Array Length">1000</defense_setting>
-      <defense_setting enabled="true" name="Tolerate JSON Parsing Warnings">1</defense_setting>
+      <defense_setting enabled="true" name="Maximum Total Length Of JSON Data">10000</defense_setting>
+      <defense_setting enabled="true" name="Maximum Value Length">100</defense_setting>
+      <defense_setting enabled="true" name="Maximum Structure Depth">10</defense_setting>
+      <defense_setting enabled="true" name="Maximum Array Length">1000</defense_setting>
+      <defense_setting enabled="true" name="Tolerate JSON Parsing Warnings">0</defense_setting>
     </json_profile>
     <character_set>
       <metachar character="0x0">disallow</metachar>
@@ -1355,27 +1355,27 @@ Connection: close</response_header>
       <enable_web_services_security>false</enable_web_services_security>
       <enable_xml_security>true</enable_xml_security>
       <enable_blocking_page>false</enable_blocking_page>
-      <enable_check_element_metachars>false</enable_check_element_metachars>
+      <enable_check_element_metachars>true</enable_check_element_metachars>
       <enable_check_attribute_metachars>false</enable_check_attribute_metachars>
       <enable_check_signatures>true</enable_check_signatures>
       <enable_check_param_value_lenth>false</enable_check_param_value_lenth>
       <inspect_soap_attachments>false</inspect_soap_attachments>
-      <defense_setting enabled="false" name="Maximum Document Size">1024000</defense_setting>
-      <defense_setting enabled="false" name="Maximum Elements">65536</defense_setting>
-      <defense_setting enabled="false" name="Maximum Name Length">256</defense_setting>
-      <defense_setting enabled="false" name="Maximum Attribute Value Length">1024</defense_setting>
-      <defense_setting enabled="false" name="Maximum Document Depth">32</defense_setting>
-      <defense_setting enabled="false" name="Maximum Children Per Element">1024</defense_setting>
-      <defense_setting enabled="false" name="Maximum Attributes Per Element">16</defense_setting>
-      <defense_setting enabled="false" name="Maximum NS Declarations">64</defense_setting>
-      <defense_setting enabled="true" name="Allow DTDs">1</defense_setting>
-      <defense_setting enabled="true" name="Allow External References">1</defense_setting>
-      <defense_setting enabled="true" name="Tolerate Leading White Space">1</defense_setting>
-      <defense_setting enabled="true" name="Tolerate Close Tag Shorthand">1</defense_setting>
-      <defense_setting enabled="true" name="Tolerate Numeric Names">1</defense_setting>
-      <defense_setting enabled="false" name="Maximum Namespace Length">256</defense_setting>
+      <defense_setting enabled="true" name="Maximum Document Size">1024000</defense_setting>
+      <defense_setting enabled="true" name="Maximum Elements">65536</defense_setting>
+      <defense_setting enabled="true" name="Maximum Name Length">256</defense_setting>
+      <defense_setting enabled="true" name="Maximum Attribute Value Length">1024</defense_setting>
+      <defense_setting enabled="true" name="Maximum Document Depth">32</defense_setting>
+      <defense_setting enabled="true" name="Maximum Children Per Element">1024</defense_setting>
+      <defense_setting enabled="true" name="Maximum Attributes Per Element">16</defense_setting>
+      <defense_setting enabled="true" name="Maximum NS Declarations">64</defense_setting>
+      <defense_setting enabled="true" name="Allow DTDs">0</defense_setting>
+      <defense_setting enabled="true" name="Allow External References">0</defense_setting>
+      <defense_setting enabled="true" name="Tolerate Leading White Space">0</defense_setting>
+      <defense_setting enabled="true" name="Tolerate Close Tag Shorthand">0</defense_setting>
+      <defense_setting enabled="true" name="Tolerate Numeric Names">0</defense_setting>
+      <defense_setting enabled="true" name="Maximum Namespace Length">256</defense_setting>
       <defense_setting enabled="true" name="Allow Processing Instructions">1</defense_setting>
-      <defense_setting enabled="true" name="Allow CDATA">1</defense_setting>
+      <defense_setting enabled="true" name="Allow CDATA">0</defense_setting>
     </xml_profile>
     <character_set>
       <metachar character="0x0">disallow</metachar>
@@ -1639,11 +1639,11 @@ Connection: close</response_header>
   <plain_text_profiles>
     <plain_text_profile name="Default">
       <description>Default Plain Text Profile</description>
-      <check_element_metachars>false</check_element_metachars>
+      <check_element_metachars>true</check_element_metachars>
       <check_attribute_metachars>false</check_attribute_metachars>
       <check_signatures>true</check_signatures>
-      <defense_setting enabled="false" name="Maximum Total Length">10000</defense_setting>
-      <defense_setting enabled="false" name="Maximum Line Length">100</defense_setting>
+      <defense_setting enabled="true" name="Maximum Total Length">10000</defense_setting>
+      <defense_setting enabled="true" name="Maximum Line Length">100</defense_setting>
       <defense_setting enabled="true" name="Perform Percent Decoding">0</defense_setting>
     </plain_text_profile>
     <character_set>
@@ -1915,7 +1915,7 @@ Connection: close</response_header>
       <post_data_length>1000</post_data_length>
       <check_response>false</check_response>
       <in_staging>true</in_staging>
-      <last_updated>2018-05-09T10:30:32Z</last_updated>
+      <last_updated>2018-05-09T10:29:53Z</last_updated>
       <check_url_length>true</check_url_length>
       <check_request_length>true</check_request_length>
       <check_query_string_length>true</check_query_string_length>
@@ -1925,29 +1925,29 @@ Connection: close</response_header>
   <urls>
     <url protocol="HTTPS" type="wildcard" name="*">
       <wildcard_order>1</wildcard_order>
-      <learning_mode>Never</learning_mode>
+      <learning_mode>Compact</learning_mode>
       <check_flows>false</check_flows>
       <is_entry_point>false</is_entry_point>
       <is_referrer>false</is_referrer>
       <can_change_domain_cookie>false</can_change_domain_cookie>
       <description></description>
       <user_config_level>advanced</user_config_level>
-      <check_metachars>false</check_metachars>
+      <check_metachars>true</check_metachars>
       <check_methods>false</check_methods>
       <in_staging>true</in_staging>
-      <last_updated>2018-05-09T10:30:38Z</last_updated>
+      <last_updated>2018-05-09T10:30:00Z</last_updated>
       <clickjacking_protection>
         <enabled>false</enabled>
         <allow_rendering_in_frames>Never</allow_rendering_in_frames>
         <allow_rendering_from></allow_rendering_from>
       </clickjacking_protection>
-      <cors_enforcement_enable>false</cors_enforcement_enable>
-      <allow_cors>false</allow_cors>
+      <cors_enforcement_enable>true</cors_enforcement_enable>
+      <allow_cors>true</allow_cors>
       <cors_allow_credentials_handling>unmodified</cors_allow_credentials_handling>
       <cors_allow_credentials>allow</cors_allow_credentials>
       <cors_check_maximum_age>false</cors_check_maximum_age>
       <cors_maximum_age>1800</cors_maximum_age>
-      <cors_allowed_origins_handling>unmodified</cors_allowed_origins_handling>
+      <cors_allowed_origins_handling>enforce</cors_allowed_origins_handling>
       <cors_allowed_methods_handling>unmodified</cors_allowed_methods_handling>
       <cors_allowed_headers_handling>unmodified</cors_allowed_headers_handling>
       <cors_exposed_headers_handling>unmodified</cors_exposed_headers_handling>
@@ -1983,29 +1983,29 @@ Connection: close</response_header>
     </url>
     <url protocol="HTTP" type="wildcard" name="*">
       <wildcard_order>2</wildcard_order>
-      <learning_mode>Never</learning_mode>
+      <learning_mode>Compact</learning_mode>
       <check_flows>false</check_flows>
       <is_entry_point>false</is_entry_point>
       <is_referrer>false</is_referrer>
       <can_change_domain_cookie>false</can_change_domain_cookie>
       <description></description>
       <user_config_level>advanced</user_config_level>
-      <check_metachars>false</check_metachars>
+      <check_metachars>true</check_metachars>
       <check_methods>false</check_methods>
       <in_staging>true</in_staging>
-      <last_updated>2018-05-09T10:30:38Z</last_updated>
+      <last_updated>2018-05-09T10:30:00Z</last_updated>
       <clickjacking_protection>
         <enabled>false</enabled>
         <allow_rendering_in_frames>Never</allow_rendering_in_frames>
         <allow_rendering_from></allow_rendering_from>
       </clickjacking_protection>
-      <cors_enforcement_enable>false</cors_enforcement_enable>
-      <allow_cors>false</allow_cors>
+      <cors_enforcement_enable>true</cors_enforcement_enable>
+      <allow_cors>true</allow_cors>
       <cors_allow_credentials_handling>unmodified</cors_allow_credentials_handling>
       <cors_allow_credentials>allow</cors_allow_credentials>
       <cors_check_maximum_age>false</cors_check_maximum_age>
       <cors_maximum_age>1800</cors_maximum_age>
-      <cors_allowed_origins_handling>unmodified</cors_allowed_origins_handling>
+      <cors_allowed_origins_handling>enforce</cors_allowed_origins_handling>
       <cors_allowed_methods_handling>unmodified</cors_allowed_methods_handling>
       <cors_allowed_headers_handling>unmodified</cors_allowed_headers_handling>
       <cors_exposed_headers_handling>unmodified</cors_exposed_headers_handling>
@@ -2027,16 +2027,16 @@ Connection: close</response_header>
       <content_profile>
         <profile_name>Default</profile_name>
         <header_name>Content-Type</header_name>
-        <header_value>*xml*</header_value>
-        <header_order>3</header_order>
-        <enforcement_type>xml</enforcement_type>
+        <header_value>*application/json*</header_value>
+        <header_order>2</header_order>
+        <enforcement_type>json</enforcement_type>
       </content_profile>
       <content_profile>
         <profile_name>Default</profile_name>
         <header_name>Content-Type</header_name>
-        <header_value>*json*</header_value>
-        <header_order>2</header_order>
-        <enforcement_type>json</enforcement_type>
+        <header_value>*xml*</header_value>
+        <header_order>3</header_order>
+        <enforcement_type>xml</enforcement_type>
       </content_profile>
     </url>
     <character_set>
@@ -2301,79 +2301,79 @@ Connection: close</response_header>
   <websocket_urls>
     <websocket_url protocol="WSS" type="wildcard" name="*">
       <wildcard_order>1</wildcard_order>
-      <learning_mode>Never</learning_mode>
+      <learning_mode>Always</learning_mode>
       <description></description>
       <user_config_level>advanced</user_config_level>
-      <check_metachars>false</check_metachars>
+      <check_metachars>true</check_metachars>
       <in_staging>true</in_staging>
-      <last_updated>2018-05-09T10:30:38Z</last_updated>
-      <cors_enforcement_enable>false</cors_enforcement_enable>
-      <allow_cors>false</allow_cors>
-      <cors_allowed_origins_handling>unmodified</cors_allowed_origins_handling>
+      <last_updated>2018-05-09T10:30:00Z</last_updated>
+      <cors_enforcement_enable>true</cors_enforcement_enable>
+      <allow_cors>true</allow_cors>
+      <cors_allowed_origins_handling>enforce</cors_allowed_origins_handling>
       <wildcard_includes_slash>true</wildcard_includes_slash>
       <websocket_extension>remove</websocket_extension>
       <websocket_message_format_text>true</websocket_message_format_text>
       <websocket_message_format_json>true</websocket_message_format_json>
-      <websocket_message_format_binary>true</websocket_message_format_binary>
+      <websocket_message_format_binary>false</websocket_message_format_binary>
       <message_max_binary_size>10000</message_max_binary_size>
       <message_max_frame_size>10000</message_max_frame_size>
       <message_max_frames>100</message_max_frames>
       <json_profile_name>Default</json_profile_name>
       <plain_text_profile_name>Default</plain_text_profile_name>
       <check_payload>true</check_payload>
-      <check_message_max_binary_size>false</check_message_max_binary_size>
-      <check_message_max_frame_size>false</check_message_max_frame_size>
-      <check_message_max_frames>false</check_message_max_frames>
+      <check_message_max_binary_size>true</check_message_max_binary_size>
+      <check_message_max_frame_size>true</check_message_max_frame_size>
+      <check_message_max_frames>true</check_message_max_frames>
       <in_classification>false</in_classification>
     </websocket_url>
     <websocket_url protocol="WS" type="wildcard" name="*">
       <wildcard_order>2</wildcard_order>
-      <learning_mode>Never</learning_mode>
+      <learning_mode>Always</learning_mode>
       <description></description>
       <user_config_level>advanced</user_config_level>
-      <check_metachars>false</check_metachars>
+      <check_metachars>true</check_metachars>
       <in_staging>true</in_staging>
-      <last_updated>2018-05-09T10:30:38Z</last_updated>
-      <cors_enforcement_enable>false</cors_enforcement_enable>
-      <allow_cors>false</allow_cors>
-      <cors_allowed_origins_handling>unmodified</cors_allowed_origins_handling>
+      <last_updated>2018-05-09T10:30:00Z</last_updated>
+      <cors_enforcement_enable>true</cors_enforcement_enable>
+      <allow_cors>true</allow_cors>
+      <cors_allowed_origins_handling>enforce</cors_allowed_origins_handling>
       <wildcard_includes_slash>true</wildcard_includes_slash>
       <websocket_extension>remove</websocket_extension>
       <websocket_message_format_text>true</websocket_message_format_text>
       <websocket_message_format_json>true</websocket_message_format_json>
-      <websocket_message_format_binary>true</websocket_message_format_binary>
+      <websocket_message_format_binary>false</websocket_message_format_binary>
       <message_max_binary_size>10000</message_max_binary_size>
       <message_max_frame_size>10000</message_max_frame_size>
       <message_max_frames>100</message_max_frames>
       <json_profile_name>Default</json_profile_name>
       <plain_text_profile_name>Default</plain_text_profile_name>
       <check_payload>true</check_payload>
-      <check_message_max_binary_size>false</check_message_max_binary_size>
-      <check_message_max_frame_size>false</check_message_max_frame_size>
-      <check_message_max_frames>false</check_message_max_frames>
+      <check_message_max_binary_size>true</check_message_max_binary_size>
+      <check_message_max_frame_size>true</check_message_max_frame_size>
+      <check_message_max_frames>true</check_message_max_frames>
       <in_classification>false</in_classification>
     </websocket_url>
   </websocket_urls>
   <parameters>
     <parameter type="wildcard" name="*">
       <wildcard_order>1</wildcard_order>
-      <learning_mode>When Violation Detected</learning_mode>
+      <learning_mode>Compact</learning_mode>
       <is_mandatory>false</is_mandatory>
       <allow_empty_value>true</allow_empty_value>
       <value_type>user input</value_type>
       <user_input_format></user_input_format>
       <minimum_value>0</minimum_value>
-      <maximum_value>0</maximum_value>
+      <maximum_value>10</maximum_value>
       <maximum_length>10</maximum_length>
       <match_regular_expression></match_regular_expression>
       <is_sensitive>false</is_sensitive>
       <in_staging>true</in_staging>
-      <last_updated>2018-05-09T10:30:32Z</last_updated>
+      <last_updated>2018-05-09T10:29:53Z</last_updated>
       <parameter_name_metachars>
-        <check_metachars>false</check_metachars>
+        <check_metachars>true</check_metachars>
       </parameter_name_metachars>
-      <check_maximum_length>false</check_maximum_length>
-      <check_metachars>false</check_metachars>
+      <check_maximum_length>true</check_maximum_length>
+      <check_metachars>true</check_metachars>
       <check_attack_signatures>true</check_attack_signatures>
       <allow_repeated_parameter_name>false</allow_repeated_parameter_name>
       <in_classification>false</in_classification>
@@ -22700,7 +22700,7 @@ Connection: close</response_header>
       <max_modification_suggestion_score>50</max_modification_suggestion_score>
     </tighten_rule>
     <all_trusted_ips>list</all_trusted_ips>
-    <learn_from_responses>false</learn_from_responses>
+    <learn_from_responses>true</learn_from_responses>
     <learn_inactive_entities>true</learn_inactive_entities>
     <inactive_entity_inactivity_duration_in_seconds>7776000</inactive_entity_inactivity_duration_in_seconds>
     <enable_full_policy_inspection>true</enable_full_policy_inspection>
@@ -22725,16 +22725,16 @@ Connection: close</response_header>
     <maximum_allowed_modified_cookies>100</maximum_allowed_modified_cookies>
     <collapse_cookies>false</collapse_cookies>
     <collapse_cookies_occurrences>10</collapse_cookies_occurrences>
-    <flg_enforce_unmodified_cookies>false</flg_enforce_unmodified_cookies>
+    <flg_enforce_unmodified_cookies>true</flg_enforce_unmodified_cookies>
   </policy_builder_cookie>
   <policy_builder_filetype>
     <learn_file_types>Compact</learn_file_types>
     <maximum_file_types>50</maximum_file_types>
   </policy_builder_filetype>
   <policy_builder_parameter>
-    <learn_parameters>When Violation Detected</learn_parameters>
+    <learn_parameters>Compact</learn_parameters>
     <parameters_integer_value>false</parameters_integer_value>
-    <maximum_parameters>10000</maximum_parameters>
+    <maximum_parameters>100</maximum_parameters>
     <dynamic_parameters>
       <unique_value_sets>10</unique_value_sets>
       <hidden_fields>false</hidden_fields>
@@ -22744,19 +22744,19 @@ Connection: close</response_header>
     <parameter_level>global</parameter_level>
     <collapse_parameters>true</collapse_parameters>
     <collapse_parameters_occurrences>10</collapse_parameters_occurrences>
-    <classify_parameters>false</classify_parameters>
+    <classify_parameters>true</classify_parameters>
   </policy_builder_parameter>
   <policy_builder_url>
-    <learn_urls>Never</learn_urls>
-    <learn_websocket_urls>Never</learn_websocket_urls>
-    <maximum_urls>10000</maximum_urls>
+    <learn_urls>Compact</learn_urls>
+    <learn_websocket_urls>Always</learn_websocket_urls>
+    <maximum_urls>100</maximum_urls>
     <maximum_websocket_urls>100</maximum_websocket_urls>
     <collapse_urls>false</collapse_urls>
     <collapse_urls_occurrences>500</collapse_urls_occurrences>
     <collapse_urls_depth>2</collapse_urls_depth>
-    <classify_urls>false</classify_urls>
-    <classify_websocket_urls>false</classify_websocket_urls>
-    <set_method_override_on_url>false</set_method_override_on_url>
+    <classify_urls>true</classify_urls>
+    <classify_websocket_urls>true</classify_websocket_urls>
+    <set_method_override_on_url>true</set_method_override_on_url>
     <filetype>bmp</filetype>
     <filetype>gif</filetype>
     <filetype>ico</filetype>
@@ -22777,7 +22777,7 @@ Connection: close</response_header>
     <maximum_redirection_domains>100</maximum_redirection_domains>
   </policy_builder_redirection_protection>
   <policy_builder_sessions_and_logins>
-    <flg_learn_login_pages>false</flg_learn_login_pages>
+    <flg_learn_login_pages>true</flg_learn_login_pages>
   </policy_builder_sessions_and_logins>
   <policy_builder_server_technologies>
     <learn_server_technologies>true</learn_server_technologies>
@@ -22907,8 +22907,8 @@ Connection: close</response_header>
     <login_attempts_reached>100</login_attempts_reached>
     <identify_device>false</identify_device>
     <maximum_prevention_time>3600</maximum_prevention_time>
-    <flg_enabled>false</flg_enabled>
-    <last_updated>1525861832</last_updated>
+    <flg_enabled>true</flg_enabled>
+    <last_updated>1525861793</last_updated>
     <detection_threshold_credentials_stuffing_matches_reached>100</detection_threshold_credentials_stuffing_matches_reached>
     <detection_threshold_action>alarm-and-captcha</detection_threshold_action>
     <login_attempts_from_the_same_user_threshold>3</login_attempts_from_the_same_user_threshold>
