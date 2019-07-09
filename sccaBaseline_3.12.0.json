@@ -9,18 +9,6 @@
         "Shared": {
             "class": "Application",
             "template": "shared",
-            "sccaBaselineVirtualServer": {
-                "members": [
-                    {
-                        "addressDiscovery": "static",
-                        "servicePort": 443,
-                        "serverAddresses": [
-                            "192.168.2.55"
-                        ]
-                    }
-                ],
-                "class": "Pool"
-            },
             "example_response": {
                 "class": "iRule",
                 "iRule": "when HTTP_REQUEST {\n    HTTP::respond 200 content {\n        <html>\n        <head>\n        <title>Health Check</title>\n        </head>\n        <body>\n        System is online.\n        </body>\n        </html>\n        }\n}"
@@ -31,102 +19,27 @@
                     "localPublisher": {
                         "bigip":"/Common/local-db-publisher"
                     },
-                    "logIllegalRequests": true
+                    "logBotSignatureMatchedRequests": true,
+                    "logCaptchaChallengedRequests": true,
+                    "logChallengedRequests": true,
+                    "logIllegalRequests": true,
+                    "logLegalRequests": true
                 }
+            },
+            "local_afm_log": {
+                "network": {
+                    "publisher": {
+                        "bigip": "/Common/local-db-publisher"
+                    },
+                    "logRuleMatchAccepts": true,
+                    "logRuleMatchRejects": true,
+                    "logRuleMatchDrops": true
+                },
+                "class": "Security_Log_Profile"
             },
             "sccaBaselineWAFPolicy":{
                 "class": "WAF_Policy",
-                "url": "https://raw.githubusercontent.com/Mikej81/f5-securecloud-AS3/master/asm/14.1/sccaBaselineASMPolicy.xml"
-            },
-            "sccaBaselineExampleHTTPS": {
-                "policyFirewallEnforced": {
-                    "use": "/Common/Shared/sccaBaselineAFMPolicy"
-                },
-                "policyFirewallStaged": {
-                    "use": "/Common/Shared/sccaBaselineAFMPolicy"
-                },
-                "layer4": "tcp",
-                "iRules": [
-                    "example_response"
-                ],
-                "securityLogProfiles": [
-                    {
-                        "bigip": "/Common/Log all requests"
-                    },
-                    {
-                        "bigip": "/Common/Log illegal requests"
-                    },
-                    {
-                        "use": "/Common/Shared/local_afm_log"
-                    },
-                    {
-                        "use": "/Common/Shared/bot_defense"
-                    },
-                    {
-                        "bigip": "/Common/local-dos"
-                    }
-                ],
-                "translateServerAddress": true,
-                "translateServerPort": true,
-                "class": "Service_HTTPS",
-                "profileDOS": {
-                    "bigip": "/Common/dos"
-                },
-                "profileHTTP": {
-                    "bigip": "/Common/http"
-                },
-                "serverTLS": "sccaBaselineClientSSL",
-                "profileTCP": {
-                    "bigip": "/Common/tcp"
-                },
-                "virtualAddresses": [
-                    "192.168.254.200"
-                ],
-                "virtualPort": 443,
-                "snat": "auto",
-                "policyWAF": {
-                    "use": "/Common/Shared/sccaBaselineWAFPolicy"
-                }
-            },
-            "sccaBaselineExampleIPS": {
-                "policyFirewallEnforced": {
-                    "use": "/Common/Shared/sccaBaselineAFMPolicy"
-                },
-                "policyFirewallStaged": {
-                    "use": "/Common/Shared/sccaBaselineAFMPolicy"
-                },
-                "layer4": "tcp",
-                "securityLogProfiles": [
-                    {
-                        "bigip": "/Common/Log all requests"
-                    },
-                    {
-                        "bigip": "/Common/Log illegal requests"
-                    },
-                    {
-                        "use": "/Common/Shared/bot_defense"
-                    },
-                    {
-                        "bigip": "/Common/local-dos"
-                    }
-                ],
-                "translateServerAddress": true,
-                "translateServerPort": false,
-                "class": "Service_HTTP",
-                "profileDOS": {
-                    "bigip": "/Common/dos"
-                },
-                "profileHTTP": {
-                    "bigip": "/Common/http"
-                },
-                "profileTCP": {
-                    "bigip": "/Common/tcp"
-                },
-                "virtualAddresses": [
-                    "192.168.254.201"
-                ],
-                "virtualPort": 0,
-                "snat": "auto"
+                "url": "https://raw.githubusercontent.com/Mikej81/f5-securecloud-AS3/master/asm/13.1/sccaBaselineASMPolicy.xml"
             },
             "certificate_default": {
                 "class": "Certificate",
@@ -145,17 +58,6 @@
                 ],
                 "ciphers": "HIGH",
                 "class": "TLS_Server"
-            },
-            "local_afm_log": {
-                "network": {
-                    "publisher": {
-                        "bigip": "/Common/local-db-publisher"
-                    },
-                    "logRuleMatchAccepts": true,
-                    "logRuleMatchRejects": true,
-                    "logRuleMatchDrops": true
-                },
-                "class": "Security_Log_Profile"
             },
             "sccaBaselineAFMRuleList":{
                 "class": "Firewall_Rule_List",
@@ -184,14 +86,32 @@
                     }
                 ]
                 
+            },
+            "sccaBaselineAFMPolicyHTTP": {
+                "class": "Firewall_Policy",
+                "rules": [
+                    {
+                        "action": "accept",
+                        "loggingEnabled": true,
+                        "name": "allow_all",
+                        "protocol": "any"
+                    },
+                    {
+                        "action": "accept",
+                        "loggingEnabled": true,
+                        "name": "deny_all",
+                        "protocol": "any"
+                    }
+                ]
+                
             }
         }
     },
     "mgmt": {
         "class": "Tenant",
-        "Shared": {
+        "admin": {
             "class": "Application",
-            "template": "shared",
+            "template": "generic",
             "rdp_pool": {
                 "members": [
                     {
@@ -243,7 +163,13 @@
                 ],
                 "securityLogProfiles": [
                     {
-                        "bigip": "/Common/Log all requests"
+                        "use": "/Common/Shared/local_afm_log"
+                    },
+                    {
+                        "use": "/Common/Shared/bot_defense"
+                    },
+                    {
+                        "bigip": "/Common/local-dos"
                     }
                 ],
                 "translateServerAddress": true,
@@ -275,7 +201,13 @@
                 "pool": "rdp_pool",
                 "securityLogProfiles": [
                     {
-                        "bigip": "/Common/Log all requests"
+                        "use": "/Common/Shared/local_afm_log"
+                    },
+                    {
+                        "use": "/Common/Shared/bot_defense"
+                    },
+                    {
+                        "bigip": "/Common/local-dos"
                     }
                 ],
                 "translateServerAddress": true,
@@ -301,7 +233,13 @@
                 "pool": "ssh_pool",
                 "securityLogProfiles": [
                     {
-                        "bigip": "/Common/Log all requests"
+                        "use": "/Common/Shared/local_afm_log"
+                    },
+                    {
+                        "use": "/Common/Shared/bot_defense"
+                    },
+                    {
+                        "bigip": "/Common/local-dos"
                     }
                 ],
                 "translateServerAddress": true,
@@ -320,5 +258,107 @@
                 "snat": "auto"
             }
         }
-    }
+    },    
+    "Example": {
+        "class": "Tenant",
+        "exampleApp": {
+            "class": "Application",
+            "template": "generic",
+            "sccaBaselineExampleIPS": {
+                "policyFirewallEnforced": {
+                    "use": "/Common/Shared/sccaBaselineAFMPolicy"
+                },
+                "policyFirewallStaged": {
+                    "use": "/Common/Shared/sccaBaselineAFMPolicy"
+                },
+                "layer4": "tcp",
+                "securityLogProfiles": [
+                    {
+                        "use": "/Common/Shared/local_afm_log"
+                    },
+                    {
+                        "use": "/Common/Shared/bot_defense"
+                    },
+                    {
+                        "bigip": "/Common/local-dos"
+                    }
+                ],
+                "translateServerAddress": true,
+                "translateServerPort": false,
+                "class": "Service_TCP",
+                "profileDOS": {
+                    "bigip": "/Common/dos"
+                },
+                "profileHTTP": {
+                    "bigip": "/Common/http"
+                },
+                "profileTCP": {
+                    "bigip": "/Common/tcp"
+                },
+                "virtualAddresses": [
+                    "192.168.254.201"
+                ],
+                "virtualPort": 0,
+                "snat": "auto",
+                "pool": "sccaBaselineIPSPool"
+                
+            },
+            "sccaBaselineExampleHTTPS": {
+                "policyFirewallEnforced": {
+                    "use": "/Common/Shared/sccaBaselineAFMPolicyHTTP"
+                },
+                "policyFirewallStaged": {
+                    "use": "/Common/Shared/sccaBaselineAFMPolicyHTTP"
+                },
+                "layer4": "tcp",
+                "iRules": [
+                    "/Common/Shared/example_response"
+                ],
+                "securityLogProfiles": [
+                    {
+                        "use": "/Common/Shared/local_afm_log"
+                    },
+                    {
+                        "use": "/Common/Shared/bot_defense"
+                    },
+                    {
+                        "bigip": "/Common/local-dos"
+                    }
+                ],
+                "translateServerAddress": true,
+                "translateServerPort": true,
+                "class": "Service_HTTPS",
+                "profileDOS": {
+                    "bigip": "/Common/dos"
+                },
+                "profileHTTP": {
+                    "bigip": "/Common/http"
+                },
+                "serverTLS": "/Common/Shared/sccaBaselineClientSSL",
+                "profileTCP": {
+                    "bigip": "/Common/tcp"
+                },
+                "virtualAddresses": [
+                    "192.168.254.200"
+                ],
+                "virtualPort": 443,
+                "snat": "auto",
+                "policyWAF": {
+                    "use": "/Common/Shared/sccaBaselineWAFPolicy"
+                }
+            },
+            "sccaBaselineIPSPool": {
+                "members": [
+                    {
+                        "addressDiscovery": "static",
+                        "servicePort": 443,
+                        "serverAddresses": [
+                            "192.168.2.55"
+                        ]
+                    }
+                ],
+                "class": "Pool"
+            }
+        }
+}
 }

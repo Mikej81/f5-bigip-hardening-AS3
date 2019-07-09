@@ -158,12 +158,22 @@
 					"response": []
 				},
 				{
-					"name": "as3_delete_app",
+					"name": "as3_delete_all",
 					"request": {
-						"method": "DELETE",
-						"header": [],
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"class\": \"ADC\",\r\n    \"schemaVersion\": \"3.12.0\",\r\n    \"id\": \"delete001\",\r\n    \"label\": \"Delete all the things\",\r\n    \"remark\": \"Blammo\",\r\n    \"Common\": {\r\n        \"class\": \"Tenant\"\r\n    },\r\n    \"mgmt\": {\r\n        \"class\": \"Tenant\"\r\n    }\r\n}"
+						},
 						"url": {
-							"raw": "https://{{HOST}}/mgmt/shared/appsvcs/declare/US_VPN",
+							"raw": "https://{{HOST}}/mgmt/shared/appsvcs/declare/",
 							"protocol": "https",
 							"host": [
 								"{{HOST}}"
@@ -173,7 +183,40 @@
 								"shared",
 								"appsvcs",
 								"declare",
-								"US_VPN"
+								""
+							]
+						},
+						"description": "delete app"
+					},
+					"response": []
+				},
+				{
+					"name": "as3_delete_app",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"type": "text",
+								"value": "{{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"class\": \"ADC\",\r\n    \"schemaVersion\": \"3.12.0\",\r\n    \"id\": \"delete001\",\r\n    \"label\": \"Delete all the things\",\r\n    \"remark\": \"Blammo\",\r\n    \"Example\": {\r\n        \"class\": \"Tenant\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{HOST}}/mgmt/shared/appsvcs/declare/",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"appsvcs",
+								"declare",
+								""
 							]
 						},
 						"description": "delete app"
@@ -236,7 +279,7 @@
 			"name": "AS3 deploy app",
 			"item": [
 				{
-					"name": "create APP",
+					"name": "create SACA Baseline",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -411,25 +454,25 @@
 	],
 	"variable": [
 		{
-			"id": "623720df-99ca-4d07-90eb-970eb5335f36",
+			"id": "14475a33-54ad-4a77-96ec-0858281fec8f",
 			"key": "HOST",
 			"value": "52.227.177.156",
 			"type": "string"
 		},
 		{
-			"id": "dcc0331a-e4a2-423d-a2bb-d15129e560db",
+			"id": "5c57caa9-9bf2-4b7e-9c56-54305285dbbe",
 			"key": "WEB_USER",
 			"value": "xadmin",
 			"type": "string"
 		},
 		{
-			"id": "edd6b97c-c7f0-444f-81c5-d05a0c52829c",
+			"id": "3657e90f-c914-4137-a0ef-b40b828d8f83",
 			"key": "WEB_PASS",
 			"value": "2018F5@Networks!!",
 			"type": "string"
 		},
 		{
-			"id": "c2031258-d421-45be-83c9-524922d8fea0",
+			"id": "1f72f0e7-7e88-45a8-8bf4-06256cd0c010",
 			"key": "AS3_RPM\n",
 			"value": "f5-appsvcs-3.12.0-5.noarch.rpm",
 			"type": "string"
