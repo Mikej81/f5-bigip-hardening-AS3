@@ -4,7 +4,7 @@ protocol_inspection:
 tmsh modify security firewall policy Shared/sccaBaselineAFMPolicyHTTP rules modify { allow_all { protocol-inspection-profile protocol_inspection }}
 
 
-modify security firewall policy Shared/sccaBaselineAFMPolicyHTTP rules modify { allow_all { protocol-inspection-profile protocol_inspection_http }}
+tmsh modify security firewall policy Shared/sccaBaselineAFMPolicyHTTP rules modify { allow_all { protocol-inspection-profile protocol_inspection_http }}
 
 Logging:
 --------
@@ -23,4 +23,9 @@ bot_defense
         "logIllegalRequests": true,
         "logLegalRequests": true
     }
-},
+}
+
+ip intellgence:
+---------------
+
+tmsh modify security ip-intelligence global-policy ip-intelligence-policy ip-intelligence
