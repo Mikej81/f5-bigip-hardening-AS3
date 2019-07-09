@@ -1,0 +1,438 @@
+{
+	"info": {
+		"_postman_id": "a7ac1295-ea7f-46ae-8eb4-7c1d5d7c71ae",
+		"name": "SACA",
+		"description": "SACA AS3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "as3 install",
+			"item": [
+				{
+					"name": "as3_check",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/mgmt/shared/appsvcs/info",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"appsvcs",
+								"info"
+							]
+						},
+						"description": "delete app"
+					},
+					"response": []
+				},
+				{
+					"name": "as3_install",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a3d29c93-0961-491d-89fc-06ad25f2cf18",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"//postman.clearGlobalVariable(\"token\");",
+									"",
+									"//postman.setGlobalVariable(\"token\", \"jsonData.state.token\");",
+									"",
+									"postman.setEnvironmentVariable(\"TASKID\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"type": "text",
+								"value": "{{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"operation\":\"INSTALL\",\"packageFilePath\":\"/var/config/rest/downloads/{{AS3_RPM}}\" }"
+						},
+						"url": {
+							"raw": "https://{{HOST}}/mgmt/shared/iapp/package-management-tasks",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"iapp",
+								"package-management-tasks"
+							]
+						},
+						"description": "remove as3 package"
+					},
+					"response": []
+				},
+				{
+					"name": "as3_install_check",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOST}}/mgmt/shared/iapp/package-management-tasks/{{TASKID}}",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"iapp",
+								"package-management-tasks",
+								"{{TASKID}}"
+							]
+						},
+						"description": "delete app"
+					},
+					"response": []
+				},
+				{
+					"name": "Iapp tasks check",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{HOST}}/mgmt/shared/iapp/package-management-tasks/",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"iapp",
+								"package-management-tasks",
+								""
+							]
+						},
+						"description": "delete app"
+					},
+					"response": []
+				},
+				{
+					"name": "as3_delete_app",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{HOST}}/mgmt/shared/appsvcs/declare/US_VPN",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"appsvcs",
+								"declare",
+								"US_VPN"
+							]
+						},
+						"description": "delete app"
+					},
+					"response": []
+				},
+				{
+					"name": "as3_uninstall",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a3d29c93-0961-491d-89fc-06ad25f2cf18",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"//postman.clearGlobalVariable(\"token\");",
+									"",
+									"//postman.setGlobalVariable(\"token\", \"jsonData.state.token\");",
+									"",
+									"postman.setEnvironmentVariable(\"TASKID\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"operation\":\"UNINSTALL\",\"packageName\":\"{{AS3VERSION}}\"}"
+						},
+						"url": {
+							"raw": "https://{{HOST}}/mgmt/shared/iapp/package-management-tasks",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"iapp",
+								"package-management-tasks"
+							]
+						},
+						"description": "remove as3 package"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AS3 deploy app",
+			"item": [
+				{
+					"name": "create APP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"$schema\": \"https://raw.githubusercontent.com/F5Networks/f5-appsvcs-extension/master/schema/3.12.0/as3-schema-3.12.0-5.json\",\r\n    \"class\": \"ADC\",\r\n    \"schemaVersion\": \"3.12.0\",\r\n    \"id\": \"test123\",\r\n    \"label\": \"Converted Declaration\",\r\n    \"remark\": \"Auto-generated by Project Charon\",\r\n    \"Common\": {\r\n        \"class\": \"Tenant\",\r\n        \"Shared\": {\r\n            \"class\": \"Application\",\r\n            \"template\": \"shared\",\r\n            \"asm_auto_l7_policy__sccaBaselineExampleHTTPS\": {\r\n                \"rules\": [\r\n                    {\r\n                        \"name\": \"default\",\r\n                        \"actions\": [\r\n                            {\r\n                                \"event\": \"request\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"strategy\": \"first-match\",\r\n                \"class\": \"Endpoint_Policy\"\r\n            },\r\n            \"sccaBaselineVirtualServer\": {\r\n                \"members\": [\r\n                    {\r\n                        \"addressDiscovery\": \"static\",\r\n                        \"servicePort\": 443,\r\n                        \"serverAddresses\": [\r\n                            \"192.168.2.55\"\r\n                        ]\r\n                    }\r\n                ],\r\n                \"class\": \"Pool\"\r\n            },\r\n            \"example_response\": {\r\n                \"class\": \"iRule\",\r\n                \"iRule\": \"when HTTP_REQUEST {\\n    HTTP::respond 200 content {\\n        <html>\\n        <head>\\n        <title>Health Check</title>\\n        </head>\\n        <body>\\n        System is online.\\n        </body>\\n        </html>\\n        }\\n}\"\r\n            },\r\n            \"sccaBaselineExampleHTTPS\": {\r\n                \"policyFirewallEnforced\": {\r\n                    \"use\": \"/Common/Shared/sccaBaselineAFMPolicy\"\r\n                },\r\n                \"policyFirewallStaged\": {\r\n                    \"use\": \"/Common/Shared/sccaBaselineAFMPolicy\"\r\n                },\r\n                \"layer4\": \"tcp\",\r\n                \"iRules\": [\r\n                    \"example_response\"\r\n                ],\r\n                \"securityLogProfiles\": [\r\n                    {\r\n                        \"use\": \"/Common/Shared/Log\"\r\n                    },\r\n                    {\r\n                        \"use\": \"/Common/Shared/local_afm_log\"\r\n                    },\r\n                    {\r\n                        \"use\": \"/Common/Shared/local_bot_defense\"\r\n                    },\r\n                    {\r\n                        \"use\": \"/Common/Shared/local_dos\"\r\n                    }\r\n                ],\r\n                \"translateServerAddress\": true,\r\n                \"translateServerPort\": true,\r\n                \"class\": \"Service_HTTPS\",\r\n                \"profileDOS\": {\r\n                    \"bigip\": \"/Common/dos\"\r\n                },\r\n                \"profileHTTP\": {\r\n                    \"bigip\": \"/Common/http\"\r\n                },\r\n                \"serverTLS\": \"sccaBaselineClientSSL\",\r\n                \"profileTCP\": {\r\n                    \"bigip\": \"/Common/tcp\"\r\n                },\r\n                \"virtualAddresses\": [\r\n                    \"192.168.254.200\"\r\n                ],\r\n                \"virtualPort\": 443,\r\n                \"snat\": \"auto\",\r\n                \"policyEndpoint\": \"/Common/asm_auto_l7_policy__sccaBaselineExampleHTTPS\"\r\n            },\r\n            \"sccaBaselineExampleIPS\": {\r\n                \"policyFirewallEnforced\": {\r\n                    \"use\": \"/Common/Shared/sccaBaselineAFMPolicy\"\r\n                },\r\n                \"policyFirewallStaged\": {\r\n                    \"use\": \"/Common/Shared/sccaBaselineAFMPolicy\"\r\n                },\r\n                \"layer4\": \"tcp\",\r\n                \"securityLogProfiles\": [\r\n                    {\r\n                        \"use\": \"\\\"/Common/Shared/Log\"\r\n                    },\r\n                    {\r\n                        \"use\": \"/Common/Shared/local_bot_defense\"\r\n                    },\r\n                    {\r\n                        \"use\": \"/Common/Shared/local_dos\"\r\n                    }\r\n                ],\r\n                \"translateServerAddress\": true,\r\n                \"translateServerPort\": false,\r\n                \"class\": \"Service_HTTP\",\r\n                \"profileDOS\": {\r\n                    \"bigip\": \"/Common/dos\"\r\n                },\r\n                \"profileHTTP\": {\r\n                    \"bigip\": \"/Common/http\"\r\n                },\r\n                \"profileTCP\": {\r\n                    \"bigip\": \"/Common/tcp\"\r\n                },\r\n                \"virtualAddresses\": [\r\n                    \"192.168.254.201\"\r\n                ],\r\n                \"virtualPort\": 0,\r\n                \"snat\": \"auto\"\r\n            },\r\n            \"certificate_default\": {\r\n                \"class\": \"Certificate\",\r\n                \"certificate\": {\r\n                    \"bigip\": \"/Common/default.crt\"\r\n                },\r\n                \"privateKey\": {\r\n                    \"bigip\": \"/Common/default.key\"\r\n                }\r\n            },\r\n            \"sccaBaselineClientSSL\": {\r\n                \"certificates\": [\r\n                    {\r\n                        \"certificate\": \"certificate_default\"\r\n                    }\r\n                ],\r\n                \"ciphers\": \"HIGH\",\r\n                \"class\": \"TLS_Server\"\r\n            },\r\n            \"local_afm_log\": {\r\n                \"network\": {\r\n                    \"publisher\": {\r\n                        \"bigip\": \"/Common/local-db-publisher\"\r\n                    },\r\n                    \"logRuleMatchAccepts\": true,\r\n                    \"logRuleMatchRejects\": true,\r\n                    \"logRuleMatchDrops\": true\r\n                },\r\n                \"class\": \"Security_Log_Profile\"\r\n            },\r\n            \"sccaBaselineAFMRuleList\":{\r\n                \"class\": \"Firewall_Rule_List\",\r\n                \"rules\": [\r\n                    {\r\n                        \"action\": \"accept\",\r\n                        \"destination\": \"0.0.0.0/0\",\r\n                        \"name\": \"allow_all\",\r\n                        \"protocol\": \"any\"\r\n                    }\r\n                ]\r\n            },\r\n            \"sccaBaselineAFMPolicy\": {\r\n                \"class\": \"Firewall_Policy\",\r\n                \"rules\": [\r\n                    {\r\n                        \"action\": \"accept\",\r\n                        \"log\": \"yes\",\r\n                        \"name\": \"allow_all\",\r\n                        \"protocol\": \"any\"\r\n                    },\r\n                    {\r\n                        \"action\": \"accept\",\r\n                        \"log\": \"yes\",\r\n                        \"name\": \"deny_all\",\r\n                        \"protocol\": \"any\"\r\n                    }\r\n                ]\r\n                \r\n            }\r\n        }\r\n    },\r\n    \"mgmt\": {\r\n        \"class\": \"Tenant\",\r\n        \"Shared\": {\r\n            \"class\": \"Application\",\r\n            \"template\": \"tcp\",\r\n            \"rdp_pool\": {\r\n                \"members\": [\r\n                    {\r\n                        \"addressDiscovery\": \"static\",\r\n                        \"servicePort\": 3389,\r\n                        \"serverAddresses\": [\r\n                            \"192.168.1.55\"\r\n                        ]\r\n                    }\r\n                ],\r\n                \"monitors\": [\r\n                    {\r\n                        \"bigip\": \"/Common/tcp_half_open\"\r\n                    }\r\n                ],\r\n                \"class\": \"Pool\"\r\n            },\r\n            \"ssh_pool\": {\r\n                \"members\": [\r\n                    {\r\n                        \"addressDiscovery\": \"static\",\r\n                        \"servicePort\": 22,\r\n                        \"serverAddresses\": [\r\n                            \"192.168.1.54\"\r\n                        ]\r\n                    }\r\n                ],\r\n                \"monitors\": [\r\n                    {\r\n                        \"bigip\": \"/Common/tcp_half_open\"\r\n                    }\r\n                ],\r\n                \"class\": \"Pool\"\r\n            },\r\n            \"mgmt_health_irule\": {\r\n                \"class\": \"iRule\",\r\n                \"iRule\": \"when HTTP_REQUEST {\\n    HTTP::respond 200 content {\\n        <html>\\n        <head>\\n        <title>Health Check</title>\\n        </head>\\n        <body>\\n        System is online.\\n        </body>\\n        </html>\\n        }\\n}\"\r\n            },\r\n            \"mgmt_http\": {\r\n                \"policyFirewallEnforced\": {\r\n                    \"use\": \"/Common/Shared/sccaBaselineAFMPolicy\"\r\n                },\r\n                \"policyFirewallStaged\": {\r\n                    \"use\": \"/Common/Shared/sccaBaselineAFMPolicy\"\r\n                },\r\n                \"layer4\": \"tcp\",\r\n                \"iRules\": [\r\n                    \"mgmt_health_irule\"\r\n                ],\r\n                \"securityLogProfiles\": [\r\n                    {\r\n                        \"use\": \"\\\"/Common/Shared/Log\"\r\n                    }\r\n                ],\r\n                \"translateServerAddress\": true,\r\n                \"translateServerPort\": true,\r\n                \"class\": \"Service_HTTP\",\r\n                \"profileDOS\": {\r\n                    \"bigip\": \"/Common/dos\"\r\n                },\r\n                \"profileHTTP\": {\r\n                    \"bigip\": \"/Common/http\"\r\n                },\r\n                \"profileTCP\": {\r\n                    \"bigip\": \"/Common/tcp\"\r\n                },\r\n                \"virtualAddresses\": [\r\n                    \"0.0.0.0\"\r\n                ],\r\n                \"virtualPort\": 80,\r\n                \"snat\": \"none\"\r\n            },\r\n            \"mgmt_rdp\": {\r\n                \"policyFirewallEnforced\": {\r\n                    \"use\": \"/Common/Shared/sccaBaselineAFMPolicy\"\r\n                },\r\n                \"policyFirewallStaged\": {\r\n                    \"use\": \"/Common/Shared/sccaBaselineAFMPolicy\"\r\n                },\r\n                \"layer4\": \"tcp\",\r\n                \"pool\": \"rdp_pool\",\r\n                \"securityLogProfiles\": [\r\n                    {\r\n                        \"use\": \"\\\"/Common/Shared/Log\"\r\n                    }\r\n                ],\r\n                \"translateServerAddress\": true,\r\n                \"translateServerPort\": true,\r\n                \"class\": \"Service_TCP\",\r\n                \"profileTCP\": {\r\n                    \"bigip\": \"/Common/tcp\"\r\n                },\r\n                \"virtualAddresses\": [\r\n                    \"0.0.0.0\"\r\n                ],\r\n                \"virtualPort\": 3389,\r\n                \"snat\": \"auto\"\r\n            },\r\n            \"mgmt_ssh\": {\r\n                \"policyFirewallEnforced\": {\r\n                    \"use\": \"/Common/Shared/sccaBaselineAFMPolicy\"\r\n                },\r\n                \"policyFirewallStaged\": {\r\n                    \"use\": \"/Common/Shared/sccaBaselineAFMPolicy\"\r\n                },\r\n                \"layer4\": \"tcp\",\r\n                \"pool\": \"ssh_pool\",\r\n                \"securityLogProfiles\": [\r\n                    {\r\n                        \"use\": \"\\\"/Common/Shared/Log\"\r\n                    }\r\n                ],\r\n                \"translateServerAddress\": true,\r\n                \"translateServerPort\": true,\r\n                \"class\": \"Service_TCP\",\r\n                \"profileDOS\": {\r\n                    \"bigip\": \"/Common/dos\"\r\n                },\r\n                \"profileTCP\": {\r\n                    \"bigip\": \"/Common/tcp\"\r\n                },\r\n                \"virtualAddresses\": [\r\n                    \"0.0.0.0\"\r\n                ],\r\n                \"virtualPort\": 22,\r\n                \"snat\": \"auto\"\r\n            }\r\n        }\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{HOST}}/mgmt/shared/appsvcs/declare",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"appsvcs",
+								"declare"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check APP deploy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{HOST}}/mgmt/shared/appsvcs/declare",
+							"protocol": "https",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"appsvcs",
+								"declare"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "get token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8418d9e4-a267-460b-828d-4c6694a1bd8b",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"//postman.clearGlobalVariable(\"token\");",
+							"",
+							"//postman.setGlobalVariable(\"token\", \"jsonData.state.token\");",
+							"",
+							"postman.setEnvironmentVariable(\"TOKEN\", jsonData.token.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"{{WEB_USER}}\",\n    \"password\":\"{{WEB_PASS}}\",\n    \"loginProviderName\":\"tmos\"\n}"
+				},
+				"url": {
+					"raw": "https://{{HOST}}/mgmt/shared/authn/login",
+					"protocol": "https",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"mgmt",
+						"shared",
+						"authn",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a7636f46-33b8-4a39-ae8f-8ea04305162b",
+				"type": "text/javascript",
+				"exec": [
+					"// set vars",
+					"uri = \"/mgmt/shared/authn/login\";",
+					"host = pm.variables.get(\"HOST\");",
+					"webUser = pm.variables.get(\"WEB_USER\");",
+					"webPass = pm.variables.get(\"WEB_PASS\");",
+					"",
+					"request = {",
+					"    url: \"https://\" + host + uri,",
+					"    method: 'POST',",
+					"    header: {",
+					"        'Hostname': host,",
+					"        'Content-Type': 'Application/json'",
+					"    },",
+					"    body: {",
+					"        mode: \"raw\",",
+					"        raw: JSON.stringify({",
+					"            \"username\": webUser,",
+					"            \"password\": webPass,",
+					"            \"loginProviderName\":\"tmos\"",
+					"          })",
+					"    }",
+					"",
+					"};",
+					"",
+					"pm.sendRequest(request,function(err,response){",
+					"    if(err){",
+					"        console.log(\"Auth Error:\",err)",
+					"    }",
+					"    // var jsonData = JSON.parse(response);",
+					"    res = response.json();",
+					"    console.log(\"JSON response:\",res);",
+					"    postman.setEnvironmentVariable(\"TOKEN\", res.token.token);",
+					"",
+					"});",
+					"",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1de7f858-9a07-4d46-8cf7-0f32e2c48d52",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "623720df-99ca-4d07-90eb-970eb5335f36",
+			"key": "HOST",
+			"value": "52.227.177.156",
+			"type": "string"
+		},
+		{
+			"id": "dcc0331a-e4a2-423d-a2bb-d15129e560db",
+			"key": "WEB_USER",
+			"value": "xadmin",
+			"type": "string"
+		},
+		{
+			"id": "edd6b97c-c7f0-444f-81c5-d05a0c52829c",
+			"key": "WEB_PASS",
+			"value": "2018F5@Networks!!",
+			"type": "string"
+		},
+		{
+			"id": "c2031258-d421-45be-83c9-524922d8fea0",
+			"key": "AS3_RPM\n",
+			"value": "f5-appsvcs-3.12.0-5.noarch.rpm",
+			"type": "string"
+		}
+	]
+}
