@@ -1,0 +1,43 @@
+{
+   
+    "$schema": "https://raw.githubusercontent.com/F5Networks/f5-appsvcs-extension/master/schema/3.5.1/as3-request-schema.json",
+    "class": "AS3",
+    "action": "deploy",
+    "persist": true,
+    "declaration": {
+        "$schema": "https://raw.githubusercontent.com/F5Networks/f5-appsvcs-extension/master/schema/3.5.1/adc-schema.json",
+        "class": "ADC",
+        "schemaVersion": "3.5.0",
+        "id": "baseline001",
+        "label": "scca baseline",
+        "remark": "scca baseline 3.5.0",
+        "Common": {
+            "class":"Tenant",
+            "Shared": {
+                "class": "Application",
+                "template": "shared",
+                "example_response": {
+                    "class": "iRule",
+                    "iRule": "when HTTP_REQUEST {\n    HTTP::respond 200 content {\n        <html>\n        <head>\n        <title>Health Check</title>\n        </head>\n        <body>\n        System is online.\n        </body>\n        </html>\n        }\n}"
+                }
+            }
+            
+        },
+        "mgmt":{
+            "class": "Tenant",
+            "admin": {
+                "class": "Application",
+                "template": "generic"
+            }
+        },
+        "Example": {
+            "class": "Tenant",
+            "exampleApp": {
+                "class": "Application",
+                "template": "generic"
+            }
+        }
+    }
+
+
+}
