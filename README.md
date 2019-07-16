@@ -11,9 +11,9 @@
     - Shared logging profiles (asm/afm/bot)
     - Shared Client SSL
   - mgmt/admin
-    - 80 listner azure health monitor
+    - 80 listener azure health monitor
     - ssh pool
-    - rdp listner 
+    - rdp listener 
   - Example/exampleApp
     - https service
     - http redirect
