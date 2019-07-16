@@ -139,9 +139,6 @@
                     "translateServerAddress": true,
                     "translateServerPort": true,
                     "class": "Service_HTTP",
-                    "profileDOS": {
-                        "bigip": "/Common/dos"
-                    },
                     "profileHTTP": {
                         "bigip": "/Common/http"
                     },
@@ -203,9 +200,6 @@
                     "translateServerAddress": true,
                     "translateServerPort": true,
                     "class": "Service_TCP",
-                    "profileDOS": {
-                        "bigip": "/Common/dos"
-                    },
                     "profileTCP": {
                         "bigip": "/Common/tcp"
                     },
@@ -244,9 +238,6 @@
                     "translateServerAddress": true,
                     "translateServerPort": false,
                     "class": "Service_TCP",
-                    "profileDOS": {
-                        "bigip": "/Common/dos"
-                    },
                     "profileHTTP": {
                         "bigip": "/Common/http"
                     },
@@ -286,9 +277,6 @@
                     "translateServerAddress": true,
                     "translateServerPort": true,
                     "class": "Service_HTTPS",
-                    "profileDOS": {
-                        "bigip": "/Common/dos"
-                    },
                     "profileHTTP": {
                         "bigip": "/Common/http"
                     },
