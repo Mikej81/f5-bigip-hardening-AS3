@@ -1,6 +1,6 @@
 # F5 Secure Cloud AS3 Baselines
 
-- [Secure Cloud Computing Architecture Baseline](sccaBaseline.json) - AS3 v3.5.8
+- [Secure Cloud Computing Architecture Baseline](https://raw.githubusercontent.com/Mikej81/f5-securecloud-AS3/master/dist/latest/sccaBaseline.json) - AS3 v3.5.8
 
 
 - AS3 Creates:
