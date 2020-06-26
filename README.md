@@ -1,9 +1,18 @@
 # F5 Secure Cloud AS3 Baselines
 
-- [Secure Cloud Computing Architecture Baseline](https://raw.githubusercontent.com/Mikej81/f5-securecloud-AS3/master/dist/latest/sccaBaseline.json) - AS3 v3.5.8
+This repository contains a select of AS3 example baselines tied to DISA Secure Cloud Computing Architecture Requirements, as well as other application hardening examples for F5 Secure Cloud Architectures.  
 
+Folder Structure:
 
-- AS3 Creates:
+- dist
+  - arm - Azure Resource Manager Examples
+    - version
+  - cft - AWS Cloud Formation Templates Examples
+  - terraform - Terraform Template Examples
+
+- [ARM Secure Cloud Computing Architecture Baseline](https://raw.githubusercontent.com/Mikej81/f5-securecloud-AS3/master/dist/arm/3.16.0/sccaBaseline.json) - AS3 v3.16.0
+
+- These AS3 Examples Create the following objects:
   - Common/Shared
     - Shared AFM policy
     - Shared ASM policy [Based on DevCentral policies](https://github.com/f5devcentral/f5-asm-policy-templates "f5DevCentral")
@@ -13,7 +22,7 @@
   - mgmt/admin
     - 80 listener azure health monitor
     - ssh pool
-    - rdp listener 
+    - rdp listener
   - Example/exampleApp
     - https service
     - http redirect
