@@ -99,7 +99,7 @@
                             "addressDiscovery": "static",
                             "servicePort": 3389,
                             "serverAddresses": [
-                                "10.90.2.98"
+                                "${rdp_pool_addresses}"
                             ]
                         }
                     ],
@@ -116,7 +116,7 @@
                             "addressDiscovery": "static",
                             "servicePort": 22,
                             "serverAddresses": [
-                                "10.90.2.99"
+                                "${ssh_pool_addresses}"
                             ]
                         }
                     ],
@@ -334,7 +334,7 @@
                             "addressDiscovery": "static",
                             "servicePort": 3000,
                             "serverAddresses": [
-                                "10.90.2.101"
+                                "${app_pool_addresses}"
                             ]
                         }
                     ],
@@ -351,7 +351,7 @@
                             "addressDiscovery": "static",
                             "servicePort":443,
                             "serverAddresses": [
-                                "10.90.2.101"
+                                "${app_pool_addresses}"
                             ]
                         }
                     ],
@@ -368,7 +368,7 @@
                             "addressDiscovery": "static",
                             "servicePort":80,
                             "serverAddresses": [
-                                "10.90.2.101"
+                                "${app_pool_addresses}"
                             ]
                         }
                     ],
