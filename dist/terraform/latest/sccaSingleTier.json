@@ -76,10 +76,7 @@
                         "logIpErrors": true,
                         "logRuleMatchDrops": true,
                         "logRuleMatchAccepts": true
-                    }
-                },
-                "AppSecurityLogProfile": {
-                    "class": "Security_Log_Profile",
+                    },
                     "application": {
                         "facility": "local3",
                         "storageFilter": {
@@ -123,6 +120,16 @@
                                 "port": "514"
                             }
                         ]
+                    },
+                    "dosApplication": {
+                        "remotePublisher": {
+                            "use": "fwLogPublisher"
+                        }
+                    },
+                    "dosNetwork": {
+                        "publisher": {
+                            "use": "fwLogPublisher"
+                        }
                     }
                 },
                 "example_response": {
