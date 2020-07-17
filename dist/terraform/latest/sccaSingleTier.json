@@ -14,6 +14,70 @@
             "Shared": {
                 "class": "Application",
                 "template": "shared",
+                "fwLogDestinationSyslog": {
+                    "class": "Log_Destination",
+                    "type": "remote-syslog",
+                    "remoteHighSpeedLog": {
+                        "use": "fwLogDestinationHsl"
+                    },
+                    "format": "rfc5424"
+                },
+                "fwLogDestinationHsl": {
+                    "class": "Log_Destination",
+                    "type": "remote-high-speed-log",
+                    "protocol": "tcp",
+                    "pool": {
+                        "use": "hsl_pool"
+                    }
+                },
+                "hsl_pool": {
+                    "class": "Pool",
+                    "members": [
+                        {
+                            "serverAddresses": [
+                                "${log_destination}"
+                            ],
+                            "enable": true,
+                            "servicePort": 514
+                        }
+                    ],
+                    "monitors": [
+                        {
+                            "bigip": "/Common/tcp"
+                        }
+                    ]
+                },
+                "fwLogPublisher": {
+                    "class": "Log_Publisher",
+                    "destinations": [
+                        {
+                            "use": "fwLogDestinationSyslog"
+                        }
+                    ]
+                },                "fwSecurityLogProfile": {
+                    "class": "Security_Log_Profile",
+                    "network": {
+                        "publisher": {
+                            "use": "fwLogPublisher"
+                        },
+                        "storageFormat": {
+                            "fields": [
+                                "action",
+                                "dest-ip",
+                                "dest-port",
+                                "src-ip",
+                                "src-port"
+                            ]
+                        },
+                        "logTranslationFields": true,
+                        "logTcpEvents": true,
+                        "logRuleMatchRejects": true,
+                        "logTcpErrors": true,
+                        "logIpErrors": true,
+                        "logRuleMatchDrops": true,
+                        "logRuleMatchAccepts": true
+                    }
+                },
                 "example_response": {
                     "class": "iRule",
                     "iRule": "when HTTP_REQUEST {\n    HTTP::respond 200 content {\n        <html>\n        <head>\n        <title>Health Check</title>\n        </head>\n        <body>\n        System is online.\n        </body>\n        </html>\n        }\n}"
@@ -141,13 +205,7 @@
                     ],
                     "securityLogProfiles": [
                         {
-                            "bigip": "/Common/local_afm_log"
-                        },
-                        {
-                            "bigip": "/Common/local_sec_log"
-                        },
-                        {
-                            "bigip": "/Common/local-dos"
+                            "use": "/Common/Shared/fwSecurityLogProfile"
                         }
                     ],
                     "translateServerAddress": true,
@@ -176,13 +234,7 @@
                     "pool": "rdp_pool",
                     "securityLogProfiles": [
                         {
-                            "bigip": "/Common/local_afm_log"
-                        },
-                        {
-                            "bigip": "/Common/local_sec_log"
-                        },
-                        {
-                            "bigip": "/Common/local-dos"
+                            "use": "/Common/Shared/fwSecurityLogProfile"
                         }
                     ],
                     "translateServerAddress": true,
@@ -205,13 +257,7 @@
                     "pool": "ssh_pool",
                     "securityLogProfiles": [
                         {
-                            "bigip": "/Common/local_afm_log"
-                        },
-                        {
-                            "bigip": "/Common/local_sec_log"
-                        },
-                        {
-                            "bigip": "/Common/local-dos"
+                            "use": "/Common/Shared/fwSecurityLogProfile"
                         }
                     ],
                     "translateServerAddress": true,
@@ -243,13 +289,7 @@
                     "layer4": "tcp",
                     "securityLogProfiles": [
                         {
-                            "bigip": "/Common/local_afm_log"
-                        },
-                        {
-                            "bigip": "/Common/local_sec_log"
-                        },
-                        {
-                            "bigip": "/Common/local-dos"
+                            "use": "/Common/Shared/fwSecurityLogProfile"
                         }
                     ],
                     "translateServerAddress": true,
@@ -279,13 +319,7 @@
                     "layer4": "tcp",
                     "securityLogProfiles": [
                         {
-                            "bigip": "/Common/local_afm_log"
-                        },
-                        {
-                            "bigip": "/Common/local_sec_log"
-                        },
-                        {
-                            "bigip": "/Common/local-dos"
+                            "use": "/Common/Shared/fwSecurityLogProfile"
                         }
                     ],
                     "translateServerAddress": true,
@@ -318,13 +352,7 @@
                     "layer4": "tcp",
                     "securityLogProfiles": [
                         {
-                            "bigip": "/Common/local_afm_log"
-                        },
-                        {
-                            "bigip": "/Common/local_sec_log"
-                        },
-                        {
-                            "bigip": "/Common/local-dos"
+                            "use": "/Common/Shared/fwSecurityLogProfile"
                         }
                     ],
                     "translateServerAddress": true,
