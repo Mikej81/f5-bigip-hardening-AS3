@@ -53,7 +53,8 @@
                             "use": "fwLogDestinationSyslog"
                         }
                     ]
-                },                "fwSecurityLogProfile": {
+                },
+                "fwSecurityLogProfile": {
                     "class": "Security_Log_Profile",
                     "network": {
                         "publisher": {
@@ -77,13 +78,62 @@
                         "logRuleMatchAccepts": true
                     }
                 },
+                "AppSecurityLogProfile": {
+                    "class": "Security_Log_Profile",
+                    "application": {
+                        "facility": "local3",
+                        "storageFilter": {
+                            "requestType": "illegal-including-staged-signatures",
+                            "responseCodes": [
+                                "404",
+                                "201"
+                            ],
+                            "protocols": [
+                                "http"
+                            ],
+                            "httpMethods": [
+                                "PATCH",
+                                "DELETE"
+                            ],
+                            "requestContains": {
+                                "searchIn": "search-in-request",
+                                "value": "The new value"
+                            },
+                            "loginResults": [
+                                "login-result-unknown"
+                            ]
+                        },
+                        "storageFormat": {
+                            "fields": [
+                                "attack_type",
+                                "avr_id",
+                                "headers",
+                                "is_truncated"
+                            ],
+                            "delimiter": "."
+                        },
+                        "localStorage": false,
+                        "maxEntryLength": "10k",
+                        "protocol": "udp",
+                        "remoteStorage": "remote",
+                        "reportAnomaliesEnabled": true,
+                        "servers": [
+                            {
+                                "address": "${log_destination}",
+                                "port": "514"
+                            }
+                        ]
+                    }
+                },
                 "example_response": {
                     "class": "iRule",
                     "iRule": "when HTTP_REQUEST {\n    HTTP::respond 200 content {\n        <html>\n        <head>\n        <title>Health Check</title>\n        </head>\n        <body>\n        System is online.\n        </body>\n        </html>\n        }\n}"
                 },
                 "sccaBaselineWAFPolicy":{
                     "class": "WAF_Policy",
-                    "url": "${baseline_waf_policy}"
+                    "url": "${baseline_waf_policy}",
+                    "ignoreChanges": false,
+                "enforcementMode": "transparent"
                 },
                 "certificate_default": {
                     "class": "Certificate",
