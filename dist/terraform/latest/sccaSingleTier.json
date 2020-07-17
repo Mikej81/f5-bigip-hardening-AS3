@@ -1,12 +1,11 @@
 {
-    "$schema": "https://raw.githubusercontent.com/F5Networks/f5-appsvcs-extension/master/schema/latest/as3-schema.json",
     "class":"AS3",
     "action":"deploy",
     "persist":true,
     "declaration": { 
         "class": "ADC",
         "schemaVersion": "3.12.0",
-        "id": "${uuid}",
+        "id": "05faeb52-4c1b-9fa3-73be-ecd770a57df0",
         "label": "scca baseline",
         "remark": "scca baseline 3.12.0",
         "Common": {
@@ -305,7 +304,7 @@
                         "bigip": "/Common/tcp"
                     },
                     "virtualAddresses": [
-                        "${example_vs_address}"
+                        "${exampleVipSubnet}"
                     ],
                     "virtualPort": 0,
                     "snat": "auto",
@@ -336,7 +335,7 @@
                         "bigip": "/Common/tcp"
                     },
                     "virtualAddresses": [
-                        "${example_vs_address}"
+                        "${exampleVipSubnet}"
                     ],
                     "virtualPort": 443,
                     "snat": "auto",
@@ -344,7 +343,7 @@
                         "use": "/Common/Shared/sccaBaselineWAFPolicy"
                     },
                     "pool": "sccaBaselineJuiceShop"
-                },
+                },             
                 "sccaBaselineExampleHTTP": {
                     "policyFirewallEnforced": {
                         "use": "/Common/Shared/sccaBaselineAFMPolicyHTTP"
@@ -357,19 +356,18 @@
                     ],
                     "translateServerAddress": true,
                     "translateServerPort": true,
-                    "class": "Service_HTTPS",
+                    "class": "Service_HTTP",
                     "profileDOS": {
                         "bigip": "/Common/dos"
                     },
                     "profileHTTP": {
                         "bigip": "/Common/http"
                     },
-                    "serverTLS": "/Common/Shared/sccaBaselineClientSSL",
                     "profileTCP": {
                         "bigip": "/Common/tcp"
                     },
                     "virtualAddresses": [
-                        "${example_vs_address}"
+                        "${exampleVipSubnet}"
                     ],
                     "virtualPort": 8080,
                     "snat": "auto",
@@ -384,7 +382,7 @@
                             "addressDiscovery": "static",
                             "servicePort": 443,
                             "serverAddresses": [
-                                "${app_pool_addresses}"
+                                "${ips_pool_addresses}"
                             ]
                         }
                     ],
@@ -419,7 +417,7 @@
                             "addressDiscovery": "static",
                             "servicePort": 8080,
                             "serverAddresses": [
-                                "${app_pool_addresses}"
+                                "${log_destination}"
                             ]
                         }
                     ],
