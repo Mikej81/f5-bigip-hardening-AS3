@@ -265,7 +265,7 @@
                         "bigip": "/Common/tcp"
                     },
                     "virtualAddresses": [
-                        "10.90.2.0"
+                        "${example_vs_address}"
                     ],
                     "virtualPort": 0,
                     "snat": "auto",
@@ -302,7 +302,7 @@
                         "bigip": "/Common/tcp"
                     },
                     "virtualAddresses": [
-                        "10.90.2.0/24"
+                        "${example_vs_address}"
                     ],
                     "virtualPort": 443,
                     "snat": "auto",
@@ -311,13 +311,52 @@
                     },
                     "pool": "sccaBaselineJuiceShop"
                 },
+                "sccaBaselineExampleHTTP": {
+                    "policyFirewallEnforced": {
+                        "use": "/Common/Shared/sccaBaselineAFMPolicyHTTP"
+                    },
+                    "layer4": "tcp",
+                    "securityLogProfiles": [
+                        {
+                            "bigip": "/Common/local_afm_log"
+                        },
+                        {
+                            "bigip": "/Common/local_sec_log"
+                        },
+                        {
+                            "bigip": "/Common/local-dos"
+                        }
+                    ],
+                    "translateServerAddress": true,
+                    "translateServerPort": true,
+                    "class": "Service_HTTPS",
+                    "profileDOS": {
+                        "bigip": "/Common/dos"
+                    },
+                    "profileHTTP": {
+                        "bigip": "/Common/http"
+                    },
+                    "serverTLS": "/Common/Shared/sccaBaselineClientSSL",
+                    "profileTCP": {
+                        "bigip": "/Common/tcp"
+                    },
+                    "virtualAddresses": [
+                        "${example_vs_address}"
+                    ],
+                    "virtualPort": 8080,
+                    "snat": "auto",
+                    "policyWAF": {
+                        "use": "/Common/Shared/sccaBaselineWAFPolicy"
+                    },
+                    "pool": "sccaBaselinePimpMyLogs"
+                },
                 "sccaBaselineIPSPool": {
                     "members": [
                         {
                             "addressDiscovery": "static",
                             "servicePort": 443,
                             "serverAddresses": [
-                                "10.0.20.100"
+                                "${app_pool_addresses}"
                             ]
                         }
                     ],
@@ -333,6 +372,24 @@
                         {
                             "addressDiscovery": "static",
                             "servicePort": 3000,
+                            "serverAddresses": [
+                                "${app_pool_addresses}"
+                            ]
+                        }
+                    ],
+                    "class": "Pool"
+                },
+
+                "sccaBaselinePimpMyLogs": {
+                    "monitors": [
+                        {
+                            "bigip": "/Common/http"
+                        }
+                    ],
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort": 8080,
                             "serverAddresses": [
                                 "${app_pool_addresses}"
                             ]
