@@ -277,7 +277,7 @@
                         "bigip": "/Common/tcp"
                     },
                     "virtualAddresses": [
-                        "0.0.0.0"
+                        "${mgmtVipAddress}"
                     ],
                     "virtualPort": 80,
                     "snat": "none"
@@ -300,7 +300,7 @@
                         "bigip": "/Common/tcp"
                     },
                     "virtualAddresses": [
-                        "0.0.0.0"
+                        "${mgmtVipAddress}"
                     ],
                     "virtualPort": 3389,
                     "snat": "auto"
@@ -326,7 +326,7 @@
                         "bigip": "/Common/tcp"
                     },
                     "virtualAddresses": [
-                        "0.0.0.0"
+                        "${mgmtVipAddress}"
                     ],
                     "virtualPort": 22,
                     "snat": "auto"
