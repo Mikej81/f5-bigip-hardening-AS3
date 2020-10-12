@@ -224,7 +224,10 @@
                     "profileL4": "basic",
                     "snat": "auto",
                     "translateServerAddress": false,
-                    "translateServerPort": false
+                    "translateServerPort": false,
+                    "allowVlans": [
+                        "internal"
+                    ]
                 }
             }
         },
