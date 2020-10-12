@@ -222,7 +222,7 @@
                     ],
                     "virtualPort": 0,
                     "forwardingType": "ip",
-                    "layer4": "tcp",
+                    "layer4": "any",
                     "profileL4": "basic",
                     "snat": "auto",
                     "translateServerAddress": false,
