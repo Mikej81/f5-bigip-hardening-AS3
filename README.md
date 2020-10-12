@@ -1,6 +1,6 @@
-# F5 Secure Cloud AS3 Baselines
+# F5 BIG-IP Hardening AS3 Baselines
 
-This repository contains a select of AS3 example baselines tied to DISA Secure Cloud Computing Architecture Requirements, as well as other application hardening examples for F5 Secure Cloud Architectures.  
+This repository contains a select of AS3 example baselines tied to Government BIG-IP Hardening Requirements, as well as other application hardening examples for F5 Secure Cloud Architectures.  
 
 Folder Structure:
 

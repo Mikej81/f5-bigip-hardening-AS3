@@ -208,6 +208,28 @@
                 }
             }
         },
+        "transit": {
+            "class": "Tenant",
+            "transit": {
+                "class": "Application",
+                "template": "generic",
+                "transit_forward": {
+                    "class": "Service_Forwarding",
+                    "virtualAddresses": [
+                        [
+                            "0.0.0.0"
+                        ]
+                    ],
+                    "virtualPort": 0,
+                    "forwardingType": "ip",
+                    "layer4": "tcp",
+                    "profileL4": "basic",
+                    "snat": "auto",
+                    "translateServerAddress": false,
+                    "translateServerPort": false
+                }
+            }
+        },
         "mgmt": {
             "class": "Tenant",
             "admin": {
