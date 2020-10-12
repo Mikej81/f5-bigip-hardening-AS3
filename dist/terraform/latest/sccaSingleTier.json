@@ -216,9 +216,7 @@
                 "transit_forward": {
                     "class": "Service_Forwarding",
                     "virtualAddresses": [
-                        [
                             "0.0.0.0/0"
-                        ]
                     ],
                     "virtualPort": 0,
                     "forwardingType": "ip",
