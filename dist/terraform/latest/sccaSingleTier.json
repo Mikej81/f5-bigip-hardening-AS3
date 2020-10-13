@@ -229,6 +229,28 @@
                     "allowVlans": [
                         "internal"
                     ]
+                },
+                "transit_health_irule": {
+                    "class": "iRule",
+                    "iRule": "when HTTP_REQUEST {\n    HTTP::respond 200 content {\n        <html>\n        <head>\n        <title>Health Check</title>\n        </head>\n        <body>\n        System is online.\n        </body>\n        </html>\n        }\n}"
+                },
+                "transit_health": {
+                    "class": "Service_HTTP",
+                    "layer4": "tcp",
+                    "iRules": [
+                        "transit_health_irule"
+                    ],
+                    "profileHTTP": {
+                        "bigip": "/Common/http"
+                    },
+                    "profileTCP": {
+                        "bigip": "/Common/tcp"
+                    },
+                    "virtualAddresses": [
+                        "${transitVipAddress}"
+                    ],
+                    "virtualPort": 34568,
+                    "snat": "none"
                 }
             }
         },
