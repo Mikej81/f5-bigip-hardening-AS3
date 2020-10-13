@@ -225,10 +225,7 @@
                     "profileL4": "basic",
                     "snat": "auto",
                     "translateServerAddress": false,
-                    "translateServerPort": false,
-                    "allowVlans": [
-                        "internal"
-                    ]
+                    "translateServerPort": false
                 },
                 "transit_health_irule": {
                     "class": "iRule",
