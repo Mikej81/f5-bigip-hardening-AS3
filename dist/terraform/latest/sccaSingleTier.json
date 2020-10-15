@@ -219,13 +219,22 @@
                     "virtualAddresses": [
                             "0.0.0.0/0"
                     ],
+                    "profileL4": {
+                        "use": "route_friendly_fastl4"
+                    },
                     "virtualPort": 0,
                     "forwardingType": "ip",
                     "layer4": "any",
-                    "profileL4": "basic",
                     "snat": "auto",
                     "translateServerAddress": false,
                     "translateServerPort": false
+                },
+                "route_friendly_fastl4": {
+                    "class": "L4_Profile",
+                    "idleTimeout": 300,
+                    "looseClose": true,
+                    "looseInitialization": true,
+                    "resetOnTimeout": false
                 },
                 "transit_health_irule": {
                     "class": "iRule",
