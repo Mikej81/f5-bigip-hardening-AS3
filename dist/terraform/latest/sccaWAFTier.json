@@ -139,7 +139,7 @@
                 },
                 "sccaBaselineWAFPolicy":{
                     "class": "WAF_Policy",
-                    "url": "${baseline_waf_policy}",
+                    "file": "/config/policy.xml",
                     "ignoreChanges": false,
                 "enforcementMode": "transparent"
                 },
