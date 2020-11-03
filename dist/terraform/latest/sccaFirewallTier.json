@@ -43,7 +43,7 @@
                     ],
                     "monitors": [
                         {
-                            "bigip": "/Common/tcp"
+                            "bigip": "/Common/udp"
                         }
                     ]
                 },
