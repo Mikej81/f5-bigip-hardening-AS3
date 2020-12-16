@@ -474,7 +474,7 @@
                 }
             }
         },    
-        "Example": {
+        "example": {
             "class": "Tenant",
             "exampleApp": {
                 "class": "Application",
