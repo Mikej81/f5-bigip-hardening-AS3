@@ -1,13 +1,14 @@
 {
+    "$schema": "https://raw.githubusercontent.com/F5Networks/f5-appsvcs-extension/master/schema/3.27.0/as3-schema-3.27.0-3.json",
     "class":"AS3",
     "action":"deploy",
     "persist":true,
     "declaration": { 
         "class": "ADC",
-        "schemaVersion": "3.12.0",
+        "schemaVersion": "3.27.0",
         "id": "05faeb52-4c1b-9fa3-73be-ecd770a57df0",
         "label": "scca baseline",
-        "remark": "scca baseline 3.12.0",
+        "remark": "scca baseline 3.27.0",
         "Common": {
             "class": "Tenant",
             "Shared": {
