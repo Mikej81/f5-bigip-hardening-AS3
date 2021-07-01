@@ -1,0 +1,698 @@
+{
+    "class":"AS3",
+    "action":"deploy",
+    "persist":true,
+    "declaration": { 
+        "class": "ADC",
+        "schemaVersion": "3.12.0",
+        "id": "05faeb52-4c1b-9fa3-73be-ecd770a57df0",
+        "label": "scca baseline",
+        "remark": "scca baseline 3.12.0",
+        "Common": {
+            "class": "Tenant",
+            "Shared": {
+                "class": "Application",
+                "template": "shared",
+                "fwLogDestinationSyslog": {
+                    "class": "Log_Destination",
+                    "type": "remote-syslog",
+                    "remoteHighSpeedLog": {
+                        "use": "fwLogDestinationHsl"
+                    },
+                    "format": "rfc5424"
+                },
+                "fwLogDestinationHsl": {
+                    "class": "Log_Destination",
+                    "type": "remote-high-speed-log",
+                    "protocol": "tcp",
+                    "pool": {
+                        "use": "hsl_pool"
+                    }
+                },
+                "hsl_pool": {
+                    "class": "Pool",
+                    "members": [
+                        {
+                            "serverAddresses": [
+                                "${log_destination}"
+                            ],
+                            "enable": true,
+                            "servicePort": 514
+                        }
+                    ],
+                    "monitors": [
+                        {
+                            "bigip": "/Common/udp"
+                        }
+                    ]
+                },
+                "fwLogPublisher": {
+                    "class": "Log_Publisher",
+                    "destinations": [
+                        {
+                            "use": "fwLogDestinationSyslog"
+                        }
+                    ]
+                },
+                "fwSecurityLogProfile": {
+                    "class": "Security_Log_Profile",
+                    "network": {
+                        "publisher": {
+                            "use": "fwLogPublisher"
+                        },
+                        "storageFormat": {
+                            "fields": [
+                                "action",
+                                "dest-ip",
+                                "dest-port",
+                                "src-ip",
+                                "src-port"
+                            ]
+                        },
+                        "logTranslationFields": true,
+                        "logTcpEvents": true,
+                        "logRuleMatchRejects": true,
+                        "logTcpErrors": true,
+                        "logIpErrors": true,
+                        "logRuleMatchDrops": true,
+                        "logRuleMatchAccepts": true
+                    },
+                    "application": {
+                        "facility": "local3",
+                        "storageFilter": {
+                            "requestType": "illegal-including-staged-signatures",
+                            "responseCodes": [
+                                "404",
+                                "201"
+                            ],
+                            "protocols": [
+                                "http"
+                            ],
+                            "httpMethods": [
+                                "PATCH",
+                                "DELETE"
+                            ],
+                            "requestContains": {
+                                "searchIn": "search-in-request",
+                                "value": "The new value"
+                            },
+                            "loginResults": [
+                                "login-result-unknown"
+                            ]
+                        },
+                        "storageFormat": {
+                            "fields": [
+                                "attack_type",
+                                "avr_id",
+                                "headers",
+                                "is_truncated"
+                            ],
+                            "delimiter": "."
+                        },
+                        "localStorage": false,
+                        "maxEntryLength": "10k",
+                        "protocol": "udp",
+                        "remoteStorage": "remote",
+                        "reportAnomaliesEnabled": true,
+                        "servers": [
+                            {
+                                "address": "${log_destination}",
+                                "port": "514"
+                            }
+                        ]
+                    },
+                    "dosApplication": {
+                        "remotePublisher": {
+                            "use": "fwLogPublisher"
+                        }
+                    },
+                    "dosNetwork": {
+                        "publisher": {
+                            "use": "fwLogPublisher"
+                        }
+                    }
+                },
+                "example_response": {
+                    "class": "iRule",
+                    "iRule": "when HTTP_REQUEST {\n    HTTP::respond 200 content {\n        <html>\n        <head>\n        <title>Health Check</title>\n        </head>\n        <body>\n        System is online.\n        </body>\n        </html>\n        }\n}"
+                },
+                "sccaBaselineWAFPolicy":{
+                    "class": "WAF_Policy",
+                    "url": "${baseline_waf_policy}",
+                    "ignoreChanges": false,
+                "enforcementMode": "transparent"
+                },
+                "certificate_default": {
+                    "class": "Certificate",
+                    "certificate": {
+                        "bigip": "/Common/default.crt"
+                    },
+                    "privateKey": {
+                        "bigip": "/Common/default.key"
+                    }
+                },
+                "sccaBaselineClientSSL": {
+                    "certificates": [
+                        {
+                            "certificate": "certificate_default"
+                        }
+                    ],
+                    "ciphers": "HIGH",
+                    "class": "TLS_Server"
+                },
+                "sccaBaselineAFMRuleList":{
+                    "class": "Firewall_Rule_List",
+                    "rules": [
+                        {
+                            "action": "accept",
+                            "name": "allow_all",
+                            "protocol": "any"
+                        }
+                    ]
+                },
+                "sccaBaselineAFMPolicy": {
+                    "class": "Firewall_Policy",
+                    "rules": [
+                        {
+                            "action": "accept",
+                            "loggingEnabled": true,
+                            "name": "allow_all",
+                            "protocol": "any"
+                        },
+                        {
+                            "action": "accept",
+                            "loggingEnabled": true,
+                            "name": "deny_all",
+                            "protocol": "any"
+                        }
+                    ]
+                    
+                },
+                "sccaBaselineAFMPolicyHTTP": {
+                    "class": "Firewall_Policy",
+                    "rules": [
+                        {
+                            "action": "accept",
+                            "loggingEnabled": true,
+                            "name": "allow_all",
+                            "protocol": "any"
+                        },
+                        {
+                            "action": "accept",
+                            "loggingEnabled": true,
+                            "name": "deny_all",
+                            "protocol": "any"
+                        }
+                    ]
+                    
+                }
+            }
+        },
+        "transit": {
+            "class": "Tenant",
+            "transit": {
+                "class": "Application",
+                "template": "generic",
+                "transit_forward": {
+                    "class": "Service_Forwarding",
+                    "virtualAddresses": [
+                            "0.0.0.0/0"
+                    ],
+                    "profileL4": {
+                        "use": "route_friendly_fastl4"
+                    },
+                    "virtualPort": 0,
+                    "forwardingType": "ip",
+                    "layer4": "any",
+                    "snat": "auto",
+                    "translateServerAddress": false,
+                    "translateServerPort": false,
+                    "translateClientPort": "preserve-strict"
+                },
+                "route_friendly_fastl4": {
+                    "class": "L4_Profile",
+                    "idleTimeout": 300,
+                    "looseClose": true,
+                    "looseInitialization": true,
+                    "resetOnTimeout": false
+                },
+                "transit_health_irule": {
+                    "class": "iRule",
+                    "iRule": "when HTTP_REQUEST {\n    HTTP::respond 200 content {\n        <html>\n        <head>\n        <title>Health Check</title>\n        </head>\n        <body>\n        System is online.\n        </body>\n        </html>\n        }\n}"
+                },
+                "transit_health": {
+                    "class": "Service_HTTP",
+                    "layer4": "tcp",
+                    "iRules": [
+                        "transit_health_irule"
+                    ],
+                    "profileHTTP": {
+                        "bigip": "/Common/http"
+                    },
+                    "profileTCP": {
+                        "bigip": "/Common/tcp"
+                    },
+                    "virtualAddresses": [
+                        "${transitVipAddress}",
+                        "${transitVipAddress2}"
+                    ],
+                    "virtualPort": 34568,
+                    "snat": "none"
+                }
+            }
+        },
+        "mgmt": {
+            "class": "Tenant",
+            "admin": {
+                "class": "Application",
+                "template": "generic",
+                "rdp_pool": {
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort": 3389,
+                            "serverAddresses": [
+                                "${rdp_pool_addresses}"
+                            ]
+                        }
+                    ],
+                    "monitors": [
+                        {
+                            "bigip": "/Common/tcp_half_open"
+                        }
+                    ],
+                    "class": "Pool"
+                },
+                "ssh_pool": {
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort": 22,
+                            "serverAddresses": [
+                                "${ssh_pool_addresses}"
+                            ]
+                        }
+                    ],
+                    "monitors": [
+                        {
+                            "bigip": "/Common/tcp_half_open"
+                        }
+                    ],
+                    "class": "Pool"
+                },
+                "mgmt_health_irule": {
+                    "class": "iRule",
+                    "iRule": "when HTTP_REQUEST {\n    HTTP::respond 200 content {\n        <html>\n        <head>\n        <title>Health Check</title>\n        </head>\n        <body>\n        System is online.\n        </body>\n        </html>\n        }\n}"
+                },
+                "mgmt_http": {
+                    "policyFirewallEnforced": {
+                        "use": "/Common/Shared/sccaBaselineAFMPolicy"
+                    },
+                    "layer4": "tcp",
+                    "iRules": [
+                        "mgmt_health_irule"
+                    ],
+                    "securityLogProfiles": [
+                        {
+                            "use": "/Common/Shared/fwSecurityLogProfile"
+                        }
+                    ],
+                    "translateServerAddress": true,
+                    "translateServerPort": true,
+                    "class": "Service_HTTP",
+                    "profileDOS": {
+                        "bigip": "/Common/dos"
+                    },
+                    "profileHTTP": {
+                        "bigip": "/Common/http"
+                    },
+                    "profileTCP": {
+                        "bigip": "/Common/tcp"
+                    },
+                    "virtualAddresses": [
+                        "${mgmtVipAddress}",
+                        "${mgmtVipAddress2}"
+                    ],
+                    "virtualPort": 80,
+                    "snat": "none"
+                },
+                "mgmt_rdp": {
+                    "policyFirewallEnforced": {
+                        "use": "/Common/Shared/sccaBaselineAFMPolicy"
+                    },
+                    "layer4": "tcp",
+                    "pool": "rdp_pool",
+                    "securityLogProfiles": [
+                        {
+                            "use": "/Common/Shared/fwSecurityLogProfile"
+                        }
+                    ],
+                    "translateServerAddress": true,
+                    "translateServerPort": true,
+                    "class": "Service_TCP",
+                    "profileTCP": {
+                        "bigip": "/Common/tcp"
+                    },
+                    "virtualAddresses": [
+                        "${mgmtVipAddress}",
+                        "${mgmtVipAddress2}"
+                    ],
+                    "virtualPort": 3389,
+                    "snat": "auto"
+                },
+                "mgmt_ssh": {
+                    "policyFirewallEnforced": {
+                        "use": "/Common/Shared/sccaBaselineAFMPolicy"
+                    },
+                    "layer4": "tcp",
+                    "pool": "ssh_pool",
+                    "securityLogProfiles": [
+                        {
+                            "use": "/Common/Shared/fwSecurityLogProfile"
+                        }
+                    ],
+                    "translateServerAddress": true,
+                    "translateServerPort": true,
+                    "class": "Service_TCP",
+                    "profileDOS": {
+                        "bigip": "/Common/dos"
+                    },
+                    "profileTCP": {
+                        "bigip": "/Common/tcp"
+                    },
+                    "virtualAddresses": [
+                        "${mgmtVipAddress}",
+                        "${mgmtVipAddress2}"
+                    ],
+                    "virtualPort": 22,
+                    "snat": "auto"
+                }
+            }
+        },    
+        "example": {
+            "class": "Tenant",
+            "exampleApp": {
+                "class": "Application",
+                "template": "generic",
+                "sccaBaselineExampleIPS": {
+                    "policyFirewallEnforced": {
+                        "use": "/Common/Shared/sccaBaselineAFMPolicy"
+                    },
+                    "layer4": "tcp",
+                    "securityLogProfiles": [
+                        {
+                            "use": "/Common/Shared/fwSecurityLogProfile"
+                        }
+                    ],
+                    "translateServerAddress": true,
+                    "translateServerPort": false,
+                    "class": "Service_TCP",
+                    "profileDOS": {
+                        "bigip": "/Common/dos"
+                    },
+                    "profileHTTP": {
+                        "bigip": "/Common/http"
+                    },
+                    "profileTCP": {
+                        "bigip": "/Common/tcp"
+                    },
+                    "virtualAddresses": [
+                        "${exampleVipSubnet}"
+                    ],
+                    "virtualPort": 0,
+                    "snat": "auto",
+                    "pool": "sccaBaselineIPSPool"
+                    
+                },
+                "sccaBaselineExampleHTTPS": {
+                    "policyFirewallEnforced": {
+                        "use": "/Common/Shared/sccaBaselineAFMPolicyHTTP"
+                    },
+                    "layer4": "tcp",
+                    "securityLogProfiles": [
+                        {
+                            "use": "/Common/Shared/fwSecurityLogProfile"
+                        }
+                    ],
+                    "translateServerAddress": true,
+                    "translateServerPort": true,
+                    "class": "Service_HTTPS",
+                    "profileDOS": {
+                        "bigip": "/Common/dos"
+                    },
+                    "profileHTTP": {
+                        "bigip": "/Common/http"
+                    },
+                    "serverTLS": "/Common/Shared/sccaBaselineClientSSL",
+                    "profileTCP": {
+                        "bigip": "/Common/tcp"
+                    },
+                    "virtualAddresses": [
+                        "${exampleVipSubnet}"
+                    ],
+                    "virtualPort": 443,
+                    "snat": "auto",
+                    "policyWAF": {
+                        "use": "/Common/Shared/sccaBaselineWAFPolicy"
+                    },
+                    "pool": "sccaBaselineJuiceShop"
+                },             
+                "sccaBaselineExampleHTTP": {
+                    "policyFirewallEnforced": {
+                        "use": "/Common/Shared/sccaBaselineAFMPolicyHTTP"
+                    },
+                    "layer4": "tcp",
+                    "securityLogProfiles": [
+                        {
+                            "use": "/Common/Shared/fwSecurityLogProfile"
+                        }
+                    ],
+                    "translateServerAddress": true,
+                    "translateServerPort": true,
+                    "class": "Service_HTTP",
+                    "profileDOS": {
+                        "bigip": "/Common/dos"
+                    },
+                    "profileHTTP": {
+                        "bigip": "/Common/http"
+                    },
+                    "profileTCP": {
+                        "bigip": "/Common/tcp"
+                    },
+                    "virtualAddresses": [
+                        "${exampleVipSubnet}"
+                    ],
+                    "virtualPort": 8080,
+                    "snat": "auto",
+                    "policyWAF": {
+                        "use": "/Common/Shared/sccaBaselineWAFPolicy"
+                    },
+                    "pool": "sccaBaselinePimpMyLogs"
+                },
+                "sccaBaselineIPSPool": {
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort": 443,
+                            "serverAddresses": [
+                                "${ips_pool_addresses}"
+                            ]
+                        }
+                    ],
+                    "class": "Pool"
+                },
+                "sccaBaselineJuiceShop": {
+                    "monitors": [
+                        {
+                            "bigip": "/Common/http"
+                        }
+                    ],
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort": 3000,
+                            "serverAddresses": [
+                                "${app_pool_addresses}"
+                            ]
+                        }
+                    ],
+                    "class": "Pool"
+                },
+                "sccaBaselineKibana": {
+                    "monitors": [
+                        {
+                            "bigip": "/Common/http"
+                        }
+                    ],
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort": 5601,
+                            "serverAddresses": [
+                                "${log_destination}"
+                            ]
+                        }
+                    ],
+                    "class": "Pool"
+                },
+                "sccaBaselineElasticJSON": {
+                    "monitors": [
+                        {
+                            "bigip": "/Common/http"
+                        }
+                    ],
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort": 9200,
+                            "serverAddresses": [
+                                "${log_destination}"
+                            ]
+                        }
+                    ],
+                    "class": "Pool"
+                },
+                "sccaBaselinePromotheus": {
+                    "monitors": [
+                        {
+                            "bigip": "/Common/http"
+                        }
+                    ],
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort": 9090,
+                            "serverAddresses": [
+                                "${log_destination}"
+                            ]
+                        }
+                    ],
+                    "class": "Pool"
+                },
+                "sccaBaselineLogstash": {
+                    "monitors": [
+                        {
+                            "bigip": "/Common/http"
+                        }
+                    ],
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort": 5044,
+                            "serverAddresses": [
+                                "${log_destination}"
+                            ]
+                        }
+                    ],
+                    "class": "Pool"
+                },
+                "sccaBaselineDemoAppHttps": {
+                    "monitors": [
+                        {
+                            "bigip": "/Common/https"
+                        }
+                    ],
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort":443,
+                            "serverAddresses": [
+                                "${app_pool_addresses}"
+                            ]
+                        }
+                    ],
+                    "class": "Pool"
+                },
+                "sccaBaselineDemoAppHttp": {
+                    "monitors": [
+                        {
+                            "bigip": "/Common/http"
+                        }
+                    ],
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort":80,
+                            "serverAddresses": [
+                                "${app_pool_addresses}"
+                            ]
+                        }
+                    ],
+                    "class": "Pool"
+                },
+
+                "sccaBaselineDemoElastic": {
+                    "monitors": [
+                        {
+                            "bigip": "/Common/http"
+                        }
+                    ],
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort":88,
+                            "serverAddresses": [
+                                "${app_pool_addresses}"
+                            ]
+                        }
+                    ],
+                    "class": "Pool"
+                },
+
+                "sccaBaselineDemoKibana": {
+                    "monitors": [
+                        {
+                            "bigip": "/Common/http"
+                        }
+                    ],
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort":80,
+                            "serverAddresses": [
+                                "${app_pool_addresses}"
+                            ]
+                        }
+                    ],
+                    "class": "Pool"
+                },
+
+                "sccaBaselineDemoLogstash": {
+                    "monitors": [
+                        {
+                            "bigip": "/Common/http"
+                        }
+                    ],
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort":89,
+                            "serverAddresses": [
+                                "${app_pool_addresses}"
+                            ]
+                        }
+                    ],
+                    "class": "Pool"
+                },
+
+                "sccaBaselineDemoPrometheus": {
+                    "monitors": [
+                        {
+                            "bigip": "/Common/http"
+                        }
+                    ],
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort":90,
+                            "serverAddresses": [
+                                "${app_pool_addresses}"
+                            ]
+                        }
+                    ],
+                    "class": "Pool"
+                }
+            }
+    }
+    }
+}
