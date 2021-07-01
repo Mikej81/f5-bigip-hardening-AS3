@@ -488,7 +488,7 @@
                     "policyWAF": {
                         "use": "/Common/Shared/sccaBaselineWAFPolicy"
                     },
-                    "pool": "sccaBaselinePimpMyLogs"
+                    "pool": "sccaBaselinePromotheus"
                 },
                 "sccaBaselineIPSPool": {
                     "members": [
