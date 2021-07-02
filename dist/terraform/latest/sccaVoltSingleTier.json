@@ -579,7 +579,7 @@
                     "virtualAddresses": [
                         "${exampleVipSubnet}"
                     ],
-                    "virtualPort": 8089,
+                    "virtualPort": 8090,
                     "snat": "auto",
                     "policyWAF": {
                         "use": "/Common/Shared/sccaBaselineWAFPolicy"
