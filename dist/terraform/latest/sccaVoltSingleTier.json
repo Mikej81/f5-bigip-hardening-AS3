@@ -520,7 +520,7 @@
                     "policyWAF": {
                         "use": "/Common/Shared/sccaBaselineWAFPolicy"
                     },
-                    "pool": "sccaBaselineDemoElastic"
+                    "pool": "sccaBaselineElasticJSON"
                 },
                 "sccaBaselineExampleKibana": {
                     "policyFirewallEnforced": {
@@ -552,7 +552,7 @@
                     "policyWAF": {
                         "use": "/Common/Shared/sccaBaselineWAFPolicy"
                     },
-                    "pool": "sccaBaselineDemoKibana"
+                    "pool": "sccaBaselineKibana"
                 },
                 "sccaBaselineExampleLogstash": {
                     "policyFirewallEnforced": {
@@ -584,7 +584,7 @@
                     "policyWAF": {
                         "use": "/Common/Shared/sccaBaselineWAFPolicy"
                     },
-                    "pool": "sccaBaselineDemoLogstash"
+                    "pool": "sccaBaselineLogstash"
                 },
                 "sccaBaselineIPSPool": {
                     "members": [
@@ -693,78 +693,6 @@
                         {
                             "addressDiscovery": "static",
                             "servicePort":80,
-                            "serverAddresses": [
-                                "${app_pool_addresses}"
-                            ]
-                        }
-                    ],
-                    "class": "Pool"
-                },
-
-                "sccaBaselineDemoElastic": {
-                    "monitors": [
-                        {
-                            "bigip": "/Common/http"
-                        }
-                    ],
-                    "members": [
-                        {
-                            "addressDiscovery": "static",
-                            "servicePort":88,
-                            "serverAddresses": [
-                                "${app_pool_addresses}"
-                            ]
-                        }
-                    ],
-                    "class": "Pool"
-                },
-
-                "sccaBaselineDemoKibana": {
-                    "monitors": [
-                        {
-                            "bigip": "/Common/http"
-                        }
-                    ],
-                    "members": [
-                        {
-                            "addressDiscovery": "static",
-                            "servicePort":80,
-                            "serverAddresses": [
-                                "${app_pool_addresses}"
-                            ]
-                        }
-                    ],
-                    "class": "Pool"
-                },
-
-                "sccaBaselineDemoLogstash": {
-                    "monitors": [
-                        {
-                            "bigip": "/Common/http"
-                        }
-                    ],
-                    "members": [
-                        {
-                            "addressDiscovery": "static",
-                            "servicePort":89,
-                            "serverAddresses": [
-                                "${app_pool_addresses}"
-                            ]
-                        }
-                    ],
-                    "class": "Pool"
-                },
-
-                "sccaBaselineDemoPrometheus": {
-                    "monitors": [
-                        {
-                            "bigip": "/Common/http"
-                        }
-                    ],
-                    "members": [
-                        {
-                            "addressDiscovery": "static",
-                            "servicePort":90,
                             "serverAddresses": [
                                 "${app_pool_addresses}"
                             ]
