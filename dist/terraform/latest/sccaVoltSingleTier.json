@@ -1,9 +1,9 @@
 {
     "$schema": "https://raw.githubusercontent.com/F5Networks/f5-appsvcs-extension/master/schema/3.27.0/as3-schema-3.27.0-3.json",
-    "class":"AS3",
-    "action":"deploy",
-    "persist":true,
-    "declaration": { 
+    "class": "AS3",
+    "action": "deploy",
+    "persist": true,
+    "declaration": {
         "class": "ADC",
         "schemaVersion": "3.27.0",
         "id": "05faeb52-4c1b-9fa3-73be-ecd770a57df0",
@@ -137,11 +137,11 @@
                     "class": "iRule",
                     "iRule": "when HTTP_REQUEST {\n    HTTP::respond 200 content {\n        <html>\n        <head>\n        <title>Health Check</title>\n        </head>\n        <body>\n        System is online.\n        </body>\n        </html>\n        }\n}"
                 },
-                "sccaBaselineWAFPolicy":{
+                "sccaBaselineWAFPolicy": {
                     "class": "WAF_Policy",
                     "url": "${baseline_waf_policy}",
                     "ignoreChanges": false,
-                "enforcementMode": "transparent"
+                    "enforcementMode": "transparent"
                 },
                 "certificate_default": {
                     "class": "Certificate",
@@ -161,7 +161,7 @@
                     "ciphers": "HIGH",
                     "class": "TLS_Server"
                 },
-                "sccaBaselineAFMRuleList":{
+                "sccaBaselineAFMRuleList": {
                     "class": "Firewall_Rule_List",
                     "rules": [
                         {
@@ -187,7 +187,6 @@
                             "protocol": "any"
                         }
                     ]
-                    
                 },
                 "sccaBaselineAFMPolicyHTTP": {
                     "class": "Firewall_Policy",
@@ -205,7 +204,6 @@
                             "protocol": "any"
                         }
                     ]
-                    
                 }
             }
         },
@@ -217,7 +215,7 @@
                 "transit_forward": {
                     "class": "Service_Forwarding",
                     "virtualAddresses": [
-                            "0.0.0.0/0"
+                        "0.0.0.0/0"
                     ],
                     "profileL4": {
                         "use": "route_friendly_fastl4"
@@ -254,8 +252,7 @@
                         "bigip": "/Common/tcp"
                     },
                     "virtualAddresses": [
-                        "${transitVipAddress}",
-                        "${transitVipAddress2}"
+                        "${transitVipAddress}"
                     ],
                     "virtualPort": 34568,
                     "snat": "none"
@@ -333,8 +330,7 @@
                         "bigip": "/Common/tcp"
                     },
                     "virtualAddresses": [
-                        "${mgmtVipAddress}",
-                        "${mgmtVipAddress2}"
+                        "${mgmtVipAddress}"
                     ],
                     "virtualPort": 80,
                     "snat": "none"
@@ -357,8 +353,7 @@
                         "bigip": "/Common/tcp"
                     },
                     "virtualAddresses": [
-                        "${mgmtVipAddress}",
-                        "${mgmtVipAddress2}"
+                        "${mgmtVipAddress}"
                     ],
                     "virtualPort": 3389,
                     "snat": "auto"
@@ -384,14 +379,13 @@
                         "bigip": "/Common/tcp"
                     },
                     "virtualAddresses": [
-                        "${mgmtVipAddress}",
-                        "${mgmtVipAddress2}"
+                        "${mgmtVipAddress}"
                     ],
                     "virtualPort": 22,
                     "snat": "auto"
                 }
             }
-        },    
+        },
         "example": {
             "class": "Tenant",
             "exampleApp": {
@@ -425,7 +419,6 @@
                     "virtualPort": 0,
                     "snat": "auto",
                     "pool": "sccaBaselineIPSPool"
-                    
                 },
                 "sccaBaselineExampleJuiceShop": {
                     "policyFirewallEnforced": {
@@ -459,7 +452,7 @@
                         "use": "/Common/Shared/sccaBaselineWAFPolicy"
                     },
                     "pool": "sccaBaselineJuiceShop"
-                },             
+                },
                 "sccaBaselineExamplePrometheus": {
                     "policyFirewallEnforced": {
                         "use": "/Common/Shared/sccaBaselineAFMPolicyHTTP"
@@ -700,7 +693,7 @@
                     "members": [
                         {
                             "addressDiscovery": "static",
-                            "servicePort":80,
+                            "servicePort": 80,
                             "serverAddresses": [
                                 "${app_pool_addresses}"
                             ],
@@ -710,6 +703,6 @@
                     "class": "Pool"
                 }
             }
-    }
+        }
     }
 }
