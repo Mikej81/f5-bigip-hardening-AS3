@@ -478,12 +478,12 @@
                     "virtualAddresses": [
                         "${exampleVipSubnet}"
                     ],
-                    "virtualPort": 8080,
+                    "virtualPort": 9090,
                     "snat": "auto",
                     "policyWAF": {
                         "use": "/Common/Shared/sccaBaselineWAFPolicy"
                     },
-                    "pool": "sccaBaselinePromotheus"
+                    "pool": "sccaBaselinePrometheus"
                 },
                 "sccaBaselineExampleElasticJSON": {
                     "policyFirewallEnforced": {
@@ -698,7 +698,7 @@
                     ],
                     "class": "Pool"
                 },
-                "sccaBaselinePromotheus": {
+                "sccaBaselinePrometheus": {
                     "monitors": [
                         {
                             "bigip": "/Common/http"
