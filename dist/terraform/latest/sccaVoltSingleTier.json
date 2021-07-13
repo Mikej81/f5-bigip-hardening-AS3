@@ -485,7 +485,7 @@
                     },
                     "pool": "sccaBaselinePromotheus"
                 },
-                "sccaBaselineExampleElastic": {
+                "sccaBaselineExampleElasticJSON": {
                     "policyFirewallEnforced": {
                         "use": "/Common/Shared/sccaBaselineAFMPolicyHTTP"
                     },
@@ -510,12 +510,44 @@
                     "virtualAddresses": [
                         "${exampleVipSubnet}"
                     ],
-                    "virtualPort": 8088,
+                    "virtualPort": 9200,
                     "snat": "auto",
                     "policyWAF": {
                         "use": "/Common/Shared/sccaBaselineWAFPolicy"
                     },
                     "pool": "sccaBaselineElasticJSON"
+                },
+                "sccaBaselineExampleElasticTransport": {
+                    "policyFirewallEnforced": {
+                        "use": "/Common/Shared/sccaBaselineAFMPolicyHTTP"
+                    },
+                    "layer4": "tcp",
+                    "securityLogProfiles": [
+                        {
+                            "use": "/Common/Shared/fwSecurityLogProfile"
+                        }
+                    ],
+                    "translateServerAddress": true,
+                    "translateServerPort": true,
+                    "class": "Service_HTTP",
+                    "profileDOS": {
+                        "bigip": "/Common/dos"
+                    },
+                    "profileHTTP": {
+                        "bigip": "/Common/http"
+                    },
+                    "profileTCP": {
+                        "bigip": "/Common/tcp"
+                    },
+                    "virtualAddresses": [
+                        "${exampleVipSubnet}"
+                    ],
+                    "virtualPort": 9300,
+                    "snat": "auto",
+                    "policyWAF": {
+                        "use": "/Common/Shared/sccaBaselineWAFPolicy"
+                    },
+                    "pool": "sccaBaselineElasticTransport"
                 },
                 "sccaBaselineExampleKibana": {
                     "policyFirewallEnforced": {
@@ -542,14 +574,14 @@
                     "virtualAddresses": [
                         "${exampleVipSubnet}"
                     ],
-                    "virtualPort": 8089,
+                    "virtualPort": 5601,
                     "snat": "auto",
                     "policyWAF": {
                         "use": "/Common/Shared/sccaBaselineWAFPolicy"
                     },
                     "pool": "sccaBaselineKibana"
                 },
-                "sccaBaselineExampleLogstash": {
+                "sccaBaselineExampleLogstashAPI": {
                     "policyFirewallEnforced": {
                         "use": "/Common/Shared/sccaBaselineAFMPolicyHTTP"
                     },
@@ -574,7 +606,7 @@
                     "virtualAddresses": [
                         "${exampleVipSubnet}"
                     ],
-                    "virtualPort": 5044,
+                    "virtualPort": 9600,
                     "snat": "auto",
                     "policyWAF": {
                         "use": "/Common/Shared/sccaBaselineWAFPolicy"
