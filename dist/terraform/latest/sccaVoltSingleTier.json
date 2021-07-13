@@ -483,6 +483,24 @@
                     "policyWAF": {
                         "use": "/Common/Shared/sccaBaselineWAFPolicy"
                     },
+                    "pool": "/Common/Shared/hsl_pool"
+                },
+                "sccaBaselineExampleFilebeat": {
+                    "layer4": "tcp",
+                    "translateServerAddress": true,
+                    "translateServerPort": true,
+                    "class": "Service_TCP",
+                    "profileDOS": {
+                        "bigip": "/Common/dos"
+                    },
+                    "profileTCP": {
+                        "bigip": "/Common/tcp"
+                    },
+                    "virtualAddresses": [
+                        "${exampleVipSubnet}"
+                    ],
+                    "virtualPort": 514,
+                    "snat": "auto",
                     "pool": "sccaBaselinePrometheus"
                 },
                 "sccaBaselineExampleElasticJSON": {
