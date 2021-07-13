@@ -579,7 +579,7 @@
                     "policyWAF": {
                         "use": "/Common/Shared/sccaBaselineWAFPolicy"
                     },
-                    "pool": "sccaBaselineLogstash"
+                    "pool": "sccaBaselineLogstashAPI"
                 },
                 "sccaBaselineIPSPool": {
                     "members": [
@@ -648,6 +648,24 @@
                     ],
                     "class": "Pool"
                 },
+                "sccaBaselineElasticTransport": {
+                    "monitors": [
+                        {
+                            "bigip": "/Common/http"
+                        }
+                    ],
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort": 9300,
+                            "serverAddresses": [
+                                "${log_destination}"
+                            ],
+                            "shareNodes": true
+                        }
+                    ],
+                    "class": "Pool"
+                },
                 "sccaBaselinePromotheus": {
                     "monitors": [
                         {
@@ -666,7 +684,7 @@
                     ],
                     "class": "Pool"
                 },
-                "sccaBaselineLogstash": {
+                "sccaBaselineLogstashBeats": {
                     "monitors": [
                         {
                             "bigip": "/Common/http"
@@ -676,6 +694,24 @@
                         {
                             "addressDiscovery": "static",
                             "servicePort": 5044,
+                            "serverAddresses": [
+                                "${log_destination}"
+                            ],
+                            "shareNodes": true
+                        }
+                    ],
+                    "class": "Pool"
+                },
+                "sccaBaselineLogstashAPI": {
+                    "monitors": [
+                        {
+                            "bigip": "/Common/http"
+                        }
+                    ],
+                    "members": [
+                        {
+                            "addressDiscovery": "static",
+                            "servicePort": 9600,
                             "serverAddresses": [
                                 "${log_destination}"
                             ],
