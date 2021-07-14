@@ -38,7 +38,7 @@
                                 "${log_destination}"
                             ],
                             "enable": true,
-                            "servicePort": 514
+                            "servicePort": 1514
                         }
                     ],
                     "monitors": [
@@ -118,7 +118,7 @@
                         "servers": [
                             {
                                 "address": "${log_destination}",
-                                "port": "514"
+                                "port": "1514"
                             }
                         ]
                     },
@@ -499,7 +499,7 @@
                     "virtualAddresses": [
                         "${exampleVipSubnet}"
                     ],
-                    "virtualPort": 514,
+                    "virtualPort": 6514,
                     "snat": "auto",
                     "pool": "sccaBaselinePrometheus"
                 },
