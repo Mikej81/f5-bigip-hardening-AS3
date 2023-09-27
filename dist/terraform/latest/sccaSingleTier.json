@@ -36,6 +36,7 @@
                             "serverAddresses": [
                                 "${log_destination}"
                             ],
+                            "shareNodes": true,
                             "enable": true,
                             "servicePort": 514
                         }
@@ -273,7 +274,8 @@
                             "servicePort": 3389,
                             "serverAddresses": [
                                 "${rdp_pool_addresses}"
-                            ]
+                            ],
+                            "shareNodes": true
                         }
                     ],
                     "monitors": [
@@ -290,7 +292,8 @@
                             "servicePort": 22,
                             "serverAddresses": [
                                 "${ssh_pool_addresses}"
-                            ]
+                            ],
+                            "shareNodes": true
                         }
                     ],
                     "monitors": [
@@ -496,7 +499,8 @@
                             "servicePort": 443,
                             "serverAddresses": [
                                 "${ips_pool_addresses}"
-                            ]
+                            ],
+                            "shareNodes": true
                         }
                     ],
                     "class": "Pool"
@@ -513,7 +517,8 @@
                             "servicePort": 3000,
                             "serverAddresses": [
                                 "${app_pool_addresses}"
-                            ]
+                            ],
+                            "shareNodes": true
                         }
                     ],
                     "class": "Pool"
@@ -531,7 +536,8 @@
                             "servicePort": 8080,
                             "serverAddresses": [
                                 "${log_destination}"
-                            ]
+                            ],
+                            "shareNodes": true
                         }
                     ],
                     "class": "Pool"
@@ -548,7 +554,8 @@
                             "servicePort":443,
                             "serverAddresses": [
                                 "${app_pool_addresses}"
-                            ]
+                            ],
+                            "shareNodes": true
                         }
                     ],
                     "class": "Pool"
@@ -565,7 +572,8 @@
                             "servicePort":80,
                             "serverAddresses": [
                                 "${app_pool_addresses}"
-                            ]
+                            ],
+                            "shareNodes": true
                         }
                     ],
                     "class": "Pool"
